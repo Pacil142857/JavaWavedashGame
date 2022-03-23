@@ -3,6 +3,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -20,7 +22,29 @@ public class Game extends JPanel{
     private Player player;
     private Map map;
 
-    // Set up everything, such as the player and the map
+    // Have the Player do things when certain buttons are pressed
+    private class Keyboard implements KeyListener {
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyChar()) {
+                case 'd':
+                    player.moveRight();
+                    break;
+                case 'a':
+                    player.moveLeft();
+                    break;
+                case ' ':
+                    player.jump(6);
+                    break;
+                case 'j':
+                    player.airDodge(5);
+                    break;
+            }
+        }
+        public void keyReleased(KeyEvent e) {}
+        public void keyTyped(KeyEvent e) {}
+    }
+
+    // Sets up everything, such as the player and the map
     public Game() {
         // set up Buffered Image and Graphics objects
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -44,6 +68,10 @@ public class Game extends JPanel{
         // Create the timer
         timer = new Timer(dt, new TimerListener());
         timer.start();
+
+        // Add key listener
+        addKeyListener(new Keyboard());
+        setFocusable(true);
     }
 
     private class TimerListener implements ActionListener {

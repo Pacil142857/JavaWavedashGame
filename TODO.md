@@ -8,6 +8,7 @@
 - [ ] Make light floors work
 - [ ] Add death counter
 - [ ] Add looping background music
+- [ ] Get friction to work
 
 ## Additional Features
 

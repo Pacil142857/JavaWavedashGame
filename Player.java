@@ -23,7 +23,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 5;
+        this.yAcc = 10;
     }
 
     // Create a white Player with a black outline at a given location with length 20
@@ -36,7 +36,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 5;
+        this.yAcc = 10;
     }
 
     // Draw the Player
@@ -48,7 +48,7 @@ public class Player {
     }
 
     // Move the player
-    public void move(int[][] rects, int[][] lightFloors, double dt) {
+    public void move(int[][] rects, int[][] lightFloors, int  dt) {
         // Move the ball without considering walls and floors
         x += xSpd;
         y += ySpd;
@@ -65,14 +65,19 @@ public class Player {
             canHitFloor = !(getRightX() < rect[0] || getLeftX() > rect[0] + rect[2]);
 
             // Check for collisions with walls
+            // TODO: Prevent the edge case of colliding with 2 walls (and 2 floors) at once from doing anything
             for (int i = rect[0]; canHitWall && (i == rect[0] || i == rect[0] + rect[2]); i += rect[2]) {
                 if (getRightX() >= i && getPrevRightX() < i) {
                     x = i - length - 1;
                     xSpd = 0;
+                    xAcc = 0;
+                    break;
                 }
                 else if (getLeftX() <= i && getPrevLeftX() > i) {
                     x = i + 1;
                     xSpd = 0;
+                    xAcc = 0;
+                    break;
                 }
             }
 
@@ -94,7 +99,7 @@ public class Player {
 
                 // Apply friction
                 if (getBottomY() == i - 1) {
-                    applyFriction();
+                    applyFriction(dt);
                 }
             }
         }
@@ -108,7 +113,7 @@ public class Player {
 
             // Next, ensure the Player doesn't go through a light floor
             if (getBottomY() >= floor[1] && getPrevBottomY() < floor[1]) {
-                y = floor[0] - length - 1;
+                y = floor[1] - length - 1;
                 
                 // Add 0.9x the vertical velocity to the horizontal velocity (wavedash)
                 if (isAirDodging) {
@@ -119,7 +124,7 @@ public class Player {
 
             // Apply friction
             if (getBottomY() == floor[1] - 1) {
-                applyFriction();
+                applyFriction(dt);
             }
         }
     }
@@ -127,6 +132,7 @@ public class Player {
     // Jump with a certain speed
     public void jump(double speed) {
        ySpd = -speed;
+       xAcc = 0;
     }
 
     // Air dodge with a certain direction
@@ -140,7 +146,7 @@ public class Player {
 
     // End an air dodge
     public void endAirDodge() {
-        yAcc = 5;
+        yAcc = 10;
         xSpd = 0;
         ySpd = 0;
         isAirDodging = false;
@@ -148,25 +154,38 @@ public class Player {
 
     // Move right
     public void moveRight() {
-        if (xAcc + 0.02 <= 50) {
-            xAcc += 0.02;
-        }
+        /*if (xSpd <= 5) {
+            xAcc += 3;
+        }*/
+        xAcc += 3;
     }
 
     // Move left
     public void moveLeft() {
-        if (xAcc - 0.02 >= -50) {
-            xAcc -= 0.02;
-        }
+        /*if (xSpd >= -5) {
+            xAcc -= 3;
+        }*/
+        xAcc -= 3;
     }
 
     // Apply friction
-    public void applyFriction() {
-        if (xAcc > 0) {
-            xAcc -= 0.01;
+    public void applyFriction(int dt) {
+        if (xSpd > 0) {
+            xAcc -= 0.2 * Math.pow(xSpd, 2);
+            if (xSpd > 3.8 && xSpd < 3.9) {
+                System.out.println(xSpd + "\t" + xAcc);
+            }
+            if (xSpd + xAcc * dt / 1000 <= 0) {
+                xSpd = 0;
+                xAcc = 0;
+            }
         }
-        else if (xAcc < 0) {
-            xAcc += 0.01;
+        else if (xSpd < 0) {
+            xAcc += 0.2 * Math.pow(xSpd, 2);
+            if (xSpd + xAcc * 1000 / dt >= 0) {
+                xSpd = 0;
+                xAcc = 0;
+            }
         }
     }
 
