@@ -33,6 +33,7 @@ public class Map {
                 rects[i][1] = y;
                 rects[i][2] = w;
                 rects[i][3] = h;
+                break;
             }
         }
     }
@@ -46,6 +47,7 @@ public class Map {
                 lightFloors[i][0] = x;
                 lightFloors[i][1] = y;
                 lightFloors[i][2] = x + w;
+                break;
             }
         }
     }
@@ -61,7 +63,7 @@ public class Map {
         // Next, outline the rectangles and draw the light floors
         g.setColor(outlineColor);
         for (int[] rect : rects) {
-                g.drawRect(rect[0], rect[1], rect[2], rect[3]);
+            g.drawRect(rect[0], rect[1], rect[2], rect[3]);
         }
         for (int[] floor : lightFloors) {
             g.drawLine(floor[0], floor[1], floor[2], floor[1]);
