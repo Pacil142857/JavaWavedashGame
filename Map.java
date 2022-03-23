@@ -67,4 +67,37 @@ public class Map {
             g.drawLine(floor[0], floor[1], floor[2], floor[1]);
         }
     }
+
+    // Getters and setters
+    public int[][] getRects() {
+        return this.rects;
+    }
+
+    public void setRects(int[][] rects) {
+        this.rects = rects;
+    }
+
+    public int[][] getLightFloors() {
+        return this.lightFloors;
+    }
+
+    public void setLightFloors(int[][] lightFloors) {
+        this.lightFloors = lightFloors;
+    }
+
+    public Color getFillColor() {
+        return this.fillColor;
+    }
+
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public Color getOutlineColor() {
+        return this.outlineColor;
+    }
+
+    public void setOutlineColor(Color outlineColor) {
+        this.outlineColor = outlineColor;
+    }
 }
