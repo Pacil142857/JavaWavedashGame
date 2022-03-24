@@ -50,56 +50,55 @@ public class Player {
     // Move the player
     public void move(int[][] rects, int[][] lightFloors, int  dt) {
         // Move the ball without considering walls and floors
+        applyFriction(dt);
         x += xSpd;
         y += ySpd;
         xSpd += xAcc * dt / 1000;
         ySpd += yAcc * dt / 1000;
 
-        boolean canHitWall = true;
-        boolean canHitFloor = true;
+        boolean canHitWall;
+        boolean canHitFloor;
 
-        // Prevent the Player from going through walls and hard floors
-        for(int[] rect : rects) {
+        double centerX;
+        double centerY;
+        for (int[] rect : rects) {
             // First, check if the player can even hit this wall or floor
             canHitWall = !(getTopY() > rect[1] + rect[3] || getBottomY() < rect[1]);
             canHitFloor = !(getRightX() < rect[0] || getLeftX() > rect[0] + rect[2]);
 
+            centerX = rect[0] + rect[2] / 2.0;
+            centerY = rect[1] + rect[3] / 2.0;
+
             // Check for collisions with walls
-            // TODO: Prevent the edge case of colliding with 2 walls (and 2 floors) at once from doing anything
-            for (int i = rect[0]; canHitWall && (i == rect[0] || i == rect[0] + rect[2]); i += rect[2]) {
-                if (getRightX() >= i && getPrevRightX() < i) {
-                    x = i - length - 1;
+            if (canHitWall && Math.abs(centerX - getCenterX()) < (length + rect[2]) / 2.0 + 1) {
+                if (getPrevRightX() < rect[0]) {
+                    x = rect[0] - length - 1;
                     xSpd = 0;
                     xAcc = 0;
-                    break;
+                    System.out.println("Wall 1");
                 }
-                else if (getLeftX() <= i && getPrevLeftX() > i) {
-                    x = i + 1;
+                else if (getPrevLeftX() > rect[0] + rect[2]){
+                    x = rect[0] + rect[2] + 1;
                     xSpd = 0;
                     xAcc = 0;
-                    break;
+                    System.out.println("Wall 2");
                 }
             }
-
-            // Check for collisions with (hard) floors
-            for (int i = rect[1]; canHitFloor && (i == rect[1] || i == rect[1] + rect[3]); i+= rect[3]) {
-                if (getBottomY() >= i && getPrevBottomY() < i) {
-                    y = i - length - 1;
-
+            
+            // Check for collisions with floors
+            if (canHitFloor && Math.abs(centerY - getCenterY()) < (length + rect[3]) / 2.0 + 1) {
+                if (getPrevTopY() > rect[1] + rect[3]) {
+                    y = rect[1] + rect[3] + 1;
+                    ySpd = 0;
+                    System.out.println("Ceiling");
+                }
+                else if (getPrevBottomY() <= rect[1]) {
+                    y = rect[1] - length - 1;
                     // Add 0.9x times the vertical velocity to the horizontal velocity (wavedash)
                     if (isAirDodging) {
                         xSpd += xSpd > 0 ? 0.9 * ySpd : -0.9 * ySpd;
                     }
                     ySpd = 0;
-                }
-                else if (getTopY() <= i && getPrevTopY() > i) {
-                    y = i + 1;
-                    ySpd = 0;
-                }
-
-                // Apply friction
-                if (getBottomY() == i - 1) {
-                    applyFriction(dt);
                 }
             }
         }
@@ -120,11 +119,6 @@ public class Player {
                     xSpd += xSpd > 0.9 ? ySpd : -0.9 * ySpd;
                 }
                 ySpd = 0;
-            }
-
-            // Apply friction
-            if (getBottomY() == floor[1] - 1) {
-                applyFriction(dt);
             }
         }
     }
@@ -225,6 +219,14 @@ public class Player {
 
     public int getPrevBottomY() {
         return (int) (y + length - ySpd + 0.5);
+    }
+
+    public double getCenterX() {
+        return x + length / 2.0;
+    }
+
+    public double getCenterY() {
+        return y + length / 2.0;
     }
 
     // Auto-generated getters and setters
