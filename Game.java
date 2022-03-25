@@ -3,12 +3,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 public class Game extends JPanel{
@@ -22,29 +22,35 @@ public class Game extends JPanel{
     private Player player;
     private Map map;
 
-    // When certain buttons are pressed, have the player take actions
-    private class TakeAction extends AbstractAction {
-        private String action;
-        private TakeAction(String action) {
-            this.action = action;
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            switch (action) {
-                case "moveRight":
+    // Have the Player do things when certain buttons are pressed
+    private class Keyboard implements KeyListener {
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyChar()) {
+                case 's':
                     player.moveRight();
                     break;
-                case "moveLeft":
+                case 'a':
                     player.moveLeft();
                     break;
-                case "jump":
+                case ' ':
                     player.jump(6);
                     break;
-                case "airDodge":
+                case 'j':
                     player.airDodge(5);
                     break;
             }
         }
+        public void keyReleased(KeyEvent e) {
+            switch (e.getKeyChar()) {
+                case 's':
+                    player.stopMovingRight();
+                    break;
+                case 'a':
+                    player.stopMovingLeft();
+                    break;
+            }
+        }
+        public void keyTyped(KeyEvent e) {}
     }
 
     // Sets up everything, such as the player and the map
@@ -72,16 +78,9 @@ public class Game extends JPanel{
         timer = new Timer(dt, new TimerListener());
         timer.start();
 
-        // Set certain buttons to perform certain actions
+        // Add key listener
+        addKeyListener(new Keyboard());
         setFocusable(true);
-        getInputMap().put(KeyStroke.getKeyStroke('s'), "moveRight");
-        getInputMap().put(KeyStroke.getKeyStroke('a'), "moveLeft");
-        getInputMap().put(KeyStroke.getKeyStroke(' '), "jump");
-        getInputMap().put(KeyStroke.getKeyStroke('j'), "airDodge");
-        getActionMap().put("moveRight", new TakeAction("moveRight"));
-        getActionMap().put("moveLeft", new TakeAction("moveLeft"));
-        getActionMap().put("jump", new TakeAction("jump"));
-        getActionMap().put("airDodge", new TakeAction("airDodge"));
     }
 
     private class TimerListener implements ActionListener {

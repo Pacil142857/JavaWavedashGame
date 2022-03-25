@@ -11,6 +11,9 @@ public class Player {
     private double ySpd;
     private double xAcc;
     private double yAcc;
+    private double xJrk;
+    private boolean movingRight = false;
+    private boolean movingLeft = false;
     private boolean isAirDodging = false;
 
     // Create a white Player with a black outline at (0, 0) with length 20
@@ -50,6 +53,10 @@ public class Player {
     // Move the player
     public void move(int[][] rects, int[][] lightFloors, int  dt) {
         // Move the ball without considering walls and floors
+        xAcc += xJrk;
+        if (xJrk > 3 || xJrk < -3) {
+            System.out.println(xJrk);
+        }
         applyFriction(dt);
         x += xSpd;
         y += ySpd;
@@ -143,20 +150,31 @@ public class Player {
         isAirDodging = false;
     }
 
-    // Move right
     public void moveRight() {
-        /*if (xSpd <= 5) {
-            xAcc += 3;
-        }*/
-        xAcc += 3;
+        if (!movingRight) {
+            xJrk += 3;
+            movingRight = true;
+        }
     }
 
-    // Move left
+    // Start moving left
     public void moveLeft() {
-        /*if (xSpd >= -5) {
-            xAcc -= 3;
-        }*/
-        xAcc -= 3;
+        if (!movingLeft) {
+            xJrk -= 3;
+            movingLeft = true;
+        }
+    }
+
+    // Stop moving right
+    public void stopMovingRight() {
+        xJrk -= 3;
+        movingRight = false;
+    }
+
+    // Stop moving left
+    public void stopMovingLeft() {
+        xJrk += 3;
+        movingLeft = false;
     }
 
     // Apply friction
