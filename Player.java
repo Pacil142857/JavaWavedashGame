@@ -53,9 +53,11 @@ public class Player {
     // Move the player
     public void move(int[][] rects, int[][] lightFloors, int  dt) {
         // Move the ball without considering walls and floors
-        xAcc += xJrk;
-        if (xJrk > 3 || xJrk < -3) {
-            System.out.println(xJrk);
+        if ((xSpd > 6 && xJrk > 0) || (xSpd < -6 && xJrk < 0)) {
+            xAcc = 0;
+        }
+        else {
+            xAcc += xJrk;
         }
         applyFriction(dt);
         x += xSpd;
@@ -179,30 +181,23 @@ public class Player {
 
     // Apply friction
     public void applyFriction(int dt) {
-        if (xSpd >= 3.873) {
-            xAcc -= 3;
-            if (xSpd + xAcc * dt / 1000 <= 0) {
-                xSpd = 0;
-                xAcc = 0;
-            }
+        boolean notMoving = (!movingLeft && !movingRight) || (movingLeft && movingRight);
+        if (!notMoving || isAirDodging) {
+            return;
         }
-        else if (xSpd <= -3.873) {
-            xAcc += 3;
-            if (xSpd + xAcc * dt / 1000 >= 0) {
-                xSpd = 0;
-                xAcc = 0;
-            }
-        }
-        else if (xSpd > 0) {
-            xAcc -= 0.2 * Math.pow(xSpd, 2);
+
+        if (xSpd > 0) {
+            xAcc -= -0.2 * Math.pow(xSpd, 2) + 9;
+
             if (xSpd + xAcc * dt / 1000 <= 0) {
                 xSpd = 0;
                 xAcc = 0;
             }
         }
         else if (xSpd < 0) {
-            xAcc += 0.2 * Math.pow(xSpd, 2);
-            if (xSpd + xAcc * 1000 / dt >= 0) {
+            xAcc += -0.2 * Math.pow(xSpd, 2) + 9;
+
+            if (xSpd + xAcc * dt / 1000 >= 0) {
                 xSpd = 0;
                 xAcc = 0;
             }
