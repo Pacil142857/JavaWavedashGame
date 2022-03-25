@@ -17,3 +17,4 @@
 ## Completed
 
 - [x] Get friction to work
+- [x] Get air dodging to only work for a short time period

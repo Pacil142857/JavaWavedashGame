@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -15,6 +16,7 @@ public class Player {
     private boolean movingRight = false;
     private boolean movingLeft = false;
     private boolean isAirDodging = false;
+    private int airDodgeTimeCounter = 0;
 
     // Create a white Player with a black outline at (0, 0) with length 20
     public Player() {
@@ -51,7 +53,7 @@ public class Player {
     }
 
     // Move the player
-    public void move(int[][] rects, int[][] lightFloors, int  dt) {
+    public void move(int[][] rects, int[][] lightFloors, int dt, BigInteger tick) {
         // Move the ball without considering walls and floors
         if ((xSpd > 6 && xJrk > 0) || (xSpd < -6 && xJrk < 0)) {
             xAcc = 0;
@@ -64,6 +66,14 @@ public class Player {
         y += ySpd;
         xSpd += xAcc * dt / 1000;
         ySpd += yAcc * dt / 1000;
+
+        if (isAirDodging) {
+            airDodgeTimeCounter++;
+        }
+        if (airDodgeTimeCounter >= 12) {
+            endAirDodge();
+            airDodgeTimeCounter = 0;
+        }
 
         boolean canHitWall;
         boolean canHitFloor;
@@ -187,7 +197,7 @@ public class Player {
         }
 
         if (xSpd > 0) {
-            xAcc -= -0.2 * Math.pow(xSpd, 2) + 9;
+            xAcc -= Math.abs(-0.2 * Math.pow(xSpd, 2) + 11);
 
             if (xSpd + xAcc * dt / 1000 <= 0) {
                 xSpd = 0;
@@ -195,7 +205,7 @@ public class Player {
             }
         }
         else if (xSpd < 0) {
-            xAcc += -0.2 * Math.pow(xSpd, 2) + 9;
+            xAcc += Math.abs(-0.2 * Math.pow(xSpd, 2) + 11);
 
             if (xSpd + xAcc * dt / 1000 >= 0) {
                 xSpd = 0;
