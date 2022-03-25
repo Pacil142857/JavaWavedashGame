@@ -75,13 +75,11 @@ public class Player {
                     x = rect[0] - length - 1;
                     xSpd = 0;
                     xAcc = 0;
-                    System.out.println("Wall 1");
                 }
                 else if (getPrevLeftX() > rect[0] + rect[2]){
                     x = rect[0] + rect[2] + 1;
                     xSpd = 0;
                     xAcc = 0;
-                    System.out.println("Wall 2");
                 }
             }
             
@@ -90,7 +88,6 @@ public class Player {
                 if (getPrevTopY() > rect[1] + rect[3]) {
                     y = rect[1] + rect[3] + 1;
                     ySpd = 0;
-                    System.out.println("Ceiling");
                 }
                 else if (getPrevBottomY() <= rect[1]) {
                     y = rect[1] - length - 1;
@@ -164,11 +161,22 @@ public class Player {
 
     // Apply friction
     public void applyFriction(int dt) {
-        if (xSpd > 0) {
-            xAcc -= 0.2 * Math.pow(xSpd, 2);
-            if (xSpd > 3.8 && xSpd < 3.9) {
-                System.out.println(xSpd + "\t" + xAcc);
+        if (xSpd >= 3.873) {
+            xAcc -= 3;
+            if (xSpd + xAcc * dt / 1000 <= 0) {
+                xSpd = 0;
+                xAcc = 0;
             }
+        }
+        else if (xSpd <= -3.873) {
+            xAcc += 3;
+            if (xSpd + xAcc * dt / 1000 >= 0) {
+                xSpd = 0;
+                xAcc = 0;
+            }
+        }
+        else if (xSpd > 0) {
+            xAcc -= 0.2 * Math.pow(xSpd, 2);
             if (xSpd + xAcc * dt / 1000 <= 0) {
                 xSpd = 0;
                 xAcc = 0;
