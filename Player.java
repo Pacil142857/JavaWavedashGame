@@ -141,8 +141,10 @@ public class Player {
 
     // Jump with a certain speed
     public void jump(double speed) {
-       ySpd = -speed;
-       xAcc = 0;
+        if (!isAirDodging) {
+            ySpd = -speed;
+            xAcc = 0;
+        }
     }
 
     // Air dodge with a certain direction
