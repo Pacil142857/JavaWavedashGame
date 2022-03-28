@@ -16,6 +16,7 @@ public class Player {
     private boolean movingRight = false;
     private boolean movingLeft = false;
     private boolean isAirDodging = false;
+    private boolean isGrounded = false;
     private int airDodgeTimeCounter = 0;
 
     // Create a white Player with a black outline at (0, 0) with length 20
@@ -67,6 +68,7 @@ public class Player {
         xSpd += xAcc * dt / 1000;
         ySpd += yAcc * dt / 1000;
 
+        // End air dodges that are done
         if (isAirDodging) {
             airDodgeTimeCounter++;
         }
@@ -75,9 +77,9 @@ public class Player {
             airDodgeTimeCounter = 0;
         }
 
+        isGrounded = false;
         boolean canHitWall;
         boolean canHitFloor;
-
         double centerX;
         double centerY;
         for (int[] rect : rects) {
@@ -117,6 +119,11 @@ public class Player {
                     ySpd = 0;
                 }
             }
+
+            // Check if the player is grounded
+            if (canHitFloor && getBottomY() + 1 == rect[1]) {
+                isGrounded = true;
+            }
         }
 
         // If the Player went through a light  floor, stop them
@@ -136,12 +143,17 @@ public class Player {
                 }
                 ySpd = 0;
             }
+
+            // Check if the player is grounded
+            if (getBottomY() + 1 == floor[1]) {
+                isGrounded = true;
+            }
         }
     }
 
     // Jump with a certain speed
     public void jump(double speed) {
-        if (!isAirDodging) {
+        if (!isAirDodging && isGrounded) {
             ySpd = -speed;
             xAcc = 0;
         }
@@ -149,6 +161,11 @@ public class Player {
 
     // Air dodge with a certain direction
     public void airDodge() {
+        // Don't air dodge if the Player is grounded
+        if (isGrounded) {
+            return;
+        }
+        
         // Set the direction of the airdodge based on which way the user is holding
         // default is down-right, but it can down-left too
         double direction = 3.9;
