@@ -29,7 +29,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 10;
+        this.yAcc = 20;
     }
 
     // Create a white Player with a black outline at a given location with length 20
@@ -42,7 +42,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 10;
+        this.yAcc = 20;
     }
 
     // Draw the Player
@@ -74,7 +74,7 @@ public class Player {
         }
         if (airDodgeTimeCounter >= 12) {
             endAirDodge();
-            airDodgeTimeCounter = 0;
+            xSpd = 0;
         }
 
         isGrounded = false;
@@ -153,7 +153,12 @@ public class Player {
 
     // Jump with a certain speed
     public void jump(double speed) {
-        if (!isAirDodging && isGrounded) {
+        if (isGrounded) {
+            // When jumping out of an air dodge, cancel the air dodge
+            if (isAirDodging) {
+                endAirDodge();
+            }
+
             ySpd = -speed;
             xAcc = 0;
         }
@@ -165,7 +170,7 @@ public class Player {
         if (isGrounded) {
             return;
         }
-        
+
         // Set the direction of the airdodge based on which way the user is holding
         // default is down-right, but it can down-left too
         double direction = 3.9;
@@ -182,10 +187,10 @@ public class Player {
 
     // End an air dodge
     public void endAirDodge() {
-        yAcc = 10;
-        xSpd = 0;
+        yAcc = 20;
         ySpd = 0;
         isAirDodging = false;
+        airDodgeTimeCounter = 0;
     }
 
     public void moveRight() {

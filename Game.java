@@ -35,10 +35,10 @@ public class Game extends JPanel{
                     player.moveLeft();
                     break;
                 case ' ':
-                    player.jump(6);
+                    player.jump(8);
                     break;
                 case 'j':
-                    player.airDodge(5);
+                    player.airDodge();
                     break;
             }
         }
