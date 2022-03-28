@@ -148,7 +148,14 @@ public class Player {
     }
 
     // Air dodge with a certain direction
-    public void airDodge(double direction) {
+    public void airDodge() {
+        // Set the direction of the airdodge based on which way the user is holding
+        // default is down-right, but it can down-left too
+        double direction = 3.9;
+        if (movingRight || !movingLeft) {
+            direction = 5.5;
+        }
+
         xAcc = 0;
         yAcc = 0;
         xSpd = 6 * Math.cos(direction);
