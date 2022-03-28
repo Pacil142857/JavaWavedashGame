@@ -228,7 +228,7 @@ public class Player {
         }
 
         if (xSpd > 0) {
-            xAcc -= Math.abs(-0.2 * Math.pow(xSpd, 2) + 11);
+            xAcc -= Math.abs(-0.5 * xSpd + 13);
 
             if (xSpd + xAcc * dt / 1000 <= 0) {
                 xSpd = 0;
@@ -236,7 +236,7 @@ public class Player {
             }
         }
         else if (xSpd < 0) {
-            xAcc += Math.abs(-0.2 * Math.pow(xSpd, 2) + 11);
+            xAcc += Math.abs(-0.5 * xSpd + 13);
 
             if (xSpd + xAcc * dt / 1000 >= 0) {
                 xSpd = 0;
