@@ -35,7 +35,7 @@ public class Game extends JPanel{
                     player.moveLeft();
                     break;
                 case ' ':
-                    player.jump(8);
+                    player.jump(10);
                     break;
                 case 'j':
                     player.airDodge();

@@ -29,7 +29,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 20;
+        this.yAcc = 30;
     }
 
     // Create a white Player with a black outline at a given location with length 20
@@ -42,7 +42,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 20;
+        this.yAcc = 30;
     }
 
     // Draw the Player
@@ -187,7 +187,7 @@ public class Player {
 
     // End an air dodge
     public void endAirDodge() {
-        yAcc = 20;
+        yAcc = 30;
         ySpd = 0;
         isAirDodging = false;
         airDodgeTimeCounter = 0;
