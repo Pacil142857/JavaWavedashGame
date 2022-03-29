@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -32,7 +31,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 30;
+        this.yAcc = 45;
     }
 
     // Create a white Player with a black outline at a given location with length 20
@@ -46,7 +45,7 @@ public class Player {
         this.xSpd = 0;
         this.ySpd = 0;
         this.xAcc = 0;
-        this.yAcc = 30;
+        this.yAcc = 45;
     }
 
     // Draw the Player
@@ -196,7 +195,7 @@ public class Player {
 
     // End an air dodge
     public void endAirDodge() {
-        yAcc = 30;
+        yAcc = 45;
         ySpd = 0;
         isAirDodging = false;
         airDodgeTimeCounter = 0;
@@ -251,13 +250,12 @@ public class Player {
 
     // Apply friction
     public void applyFriction(int dt) {
-        boolean notMoving = (!movingLeft && !movingRight) || (movingLeft && movingRight);
-        if (!notMoving || isAirDodging) {
+        if (isAirDodging) {
             return;
         }
 
         // Make the Player go left if they're going right
-        if (xSpd > 0) {
+        if (xSpd > 0 && !movingRight) {
             xAcc -= Math.abs(-0.5 * xSpd + 13);
 
             if (xSpd + xAcc * dt / 1000 <= 0) {
@@ -266,7 +264,7 @@ public class Player {
             }
         }
         // Make the player go right if they're going left
-        else if (xSpd < 0) {
+        else if (xSpd < 0 && !movingLeft) {
             xAcc += Math.abs(-0.5 * xSpd + 13);
 
             if (xSpd + xAcc * dt / 1000 >= 0) {

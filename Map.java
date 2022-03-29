@@ -11,7 +11,7 @@ public class Map {
     public Map(int numRects, int numLightFloors) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
-        this.fillColor = Color.WHITE;
+        this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
     }
 

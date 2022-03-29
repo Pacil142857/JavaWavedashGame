@@ -20,7 +20,7 @@ public class Game extends JPanel{
     private Timer timer;
     private final int dt = 16;
     private Player player;
-    private Map map;
+    private PremadeMap map;
 
     // Have the Player do things when certain buttons are pressed
     private class Keyboard implements KeyListener {
@@ -33,9 +33,9 @@ public class Game extends JPanel{
                     player.moveLeft();
                     break;
                 case ' ':
-                    player.jump(9);
+                    player.jump(11);
                     break;
-                case 'j':
+                case 'n':
                     player.airDodge();
                     break;
             }
@@ -61,18 +61,10 @@ public class Game extends JPanel{
 
         // Create a Player and a Map
         player = new Player(50, HEIGHT - 100);
-        map = new Map(3, 2, Color.BLACK, Color.BLACK);
+        map = new PremadeMap(WIDTH, HEIGHT);
 
-        // In the future, I'll probably put this in a different method or class
-        // Form the map
-        map.addRect(0, HEIGHT - 50, WIDTH, 50);
-        map.addRect(600, 100, 100, HEIGHT - 150);
-        map.addRect(100, 400, 200, 50);
-
-        map.addLightFloor(300, 550, 300);
-        map.addLightFloor(500, 400, 100);
-
-        map.drawMap(g);
+        // Form the maps
+        map.drawMap1(g);
 
         // Create the timer
         timer = new Timer(dt, new TimerListener());
