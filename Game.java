@@ -21,6 +21,7 @@ public class Game extends JPanel{
     private final int dt = 16;
     private Player player;
     private PremadeMap map;
+    private Goal goal;
 
     // Have the Player do things when certain buttons are pressed
     private class Keyboard implements KeyListener {
@@ -62,6 +63,8 @@ public class Game extends JPanel{
         // Create a Player and a Map
         player = new Player(50, HEIGHT - 100);
         map = new PremadeMap(WIDTH, HEIGHT);
+        goal = new Goal(WIDTH - 100, HEIGHT - 260, 40, 100);
+        goal.draw(g);
 
         // Form the maps
         map.drawMap1(g);
@@ -86,6 +89,11 @@ public class Game extends JPanel{
             map.drawMap(g);
             player.move(map.getRects(), map.getLightFloors(), dt);
             player.draw(g);
+            goal.draw(g);
+
+            if (goal.isTouchingPlayer(player)) {
+                // TODO: Go to next map upon reaching the goal
+            }
 
             repaint();
         }
