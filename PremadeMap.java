@@ -25,15 +25,31 @@ public class PremadeMap {
     }
 
     // A basic map where wavedashing is not required
-    public void drawMap1(Graphics g) {
+    public void formMap1(Graphics g) {
         map = new Map(7, 1);
         addBorder(map);
+
         map.addRect(150, h - 120, 50, 70);
         map.addRect(300, h - 160, 100, 110);
         map.addRect(400, h - 90, 30, 40);
         map.addLightFloor(370, h - 230, 280);
         map.addRect(700, h - 160, w - 700, 110);
-        map.drawMap(g);
+
+        rects = map.getRects();
+        lightFloors = map.getLightFloors();
+    }
+
+    // Another basic map where wavedashing is required
+    public void formMap2(Graphics g) {
+        map = new Map(6, 2);
+        addBorder(map);
+
+        map.addRect(300, 0, 2, h - 65);
+        map.addRect(500, h - 250, 50, 200);
+        map.addRect(524, 0, 2, h - 265);
+
+        map.addLightFloor(450, h - 110, 50);
+        map.addLightFloor(300, h - 190, 50);
 
         rects = map.getRects();
         lightFloors = map.getLightFloors();
