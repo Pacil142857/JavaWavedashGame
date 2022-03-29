@@ -68,15 +68,6 @@ public class Player {
         xSpd += xAcc * dt / 1000;
         ySpd += yAcc * dt / 1000;
 
-        // End air dodges that are done
-        if (isAirDodging) {
-            airDodgeTimeCounter++;
-        }
-        if (airDodgeTimeCounter >= 12) {
-            endAirDodge();
-            xSpd = 0;
-        }
-
         isGrounded = false;
         boolean canHitWall;
         boolean canHitFloor;
@@ -148,6 +139,15 @@ public class Player {
             if (getBottomY() + 1 == floor[1]) {
                 isGrounded = true;
             }
+        }
+
+        // End air dodges that are done
+        if (isAirDodging) {
+            airDodgeTimeCounter++;
+        }
+        if (airDodgeTimeCounter >= 12) {
+            endAirDodge();
+            xSpd = 0;
         }
     }
 
