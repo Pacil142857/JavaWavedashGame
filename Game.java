@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -22,7 +21,6 @@ public class Game extends JPanel{
     private final int dt = 16;
     private Player player;
     private Map map;
-    private BigInteger time = BigInteger.ZERO;
 
     // Have the Player do things when certain buttons are pressed
     private class Keyboard implements KeyListener {
@@ -35,7 +33,7 @@ public class Game extends JPanel{
                     player.moveLeft();
                     break;
                 case ' ':
-                    player.jump(10);
+                    player.jump(9);
                     break;
                 case 'j':
                     player.airDodge();
@@ -88,16 +86,13 @@ public class Game extends JPanel{
     private class TimerListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Count the time
-            time = time.add(BigInteger.ONE);
-
             // Draw the background
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, WIDTH, HEIGHT);
 
             // Draw the map & player, and make the player move
             map.drawMap(g);
-            player.move(map.getRects(), map.getLightFloors(), dt, time);
+            player.move(map.getRects(), map.getLightFloors(), dt);
             player.draw(g);
 
             repaint();

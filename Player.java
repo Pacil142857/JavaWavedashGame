@@ -6,6 +6,7 @@ public class Player {
     private double x;
     private double y;
     private int length;
+    private int height;
     private Color fillColor;
     private Color outlineColor;
     private double xSpd;
@@ -17,6 +18,7 @@ public class Player {
     private boolean movingLeft = false;
     private boolean isAirDodging = false;
     private boolean isGrounded = false;
+    private boolean isWaveDashing = false;
     private int airDodgeTimeCounter = 0;
 
     // Create a white Player with a black outline at (0, 0) with length 20
@@ -24,6 +26,7 @@ public class Player {
         this.x = 0;
         this.y = 0;
         this.length = 20;
+        this.height = 20;
         this.fillColor = Color.WHITE;
         this.outlineColor = Color.BLACK;
         this.xSpd = 0;
@@ -37,6 +40,7 @@ public class Player {
         this.x = x;
         this.y = y;
         this.length = 20;
+        this.height = 20;
         this.fillColor = Color.WHITE;
         this.outlineColor = Color.BLACK;
         this.xSpd = 0;
@@ -48,14 +52,14 @@ public class Player {
     // Draw the Player
     public void draw(Graphics g) {
         g.setColor(fillColor);
-        g.fillRect((int) (x + 0.5), (int) (y + 0.5), length, length);
+        g.fillRect((int) (x + 0.5), (int) (y + 0.5), length, height);
         g.setColor(outlineColor);
-        g.drawRect((int) (x + 0.5), (int) (y + 0.5), length, length);
+        g.drawRect((int) (x + 0.5), (int) (y + 0.5), length, height);
     }
 
     // Move the player
-    public void move(int[][] rects, int[][] lightFloors, int dt, BigInteger tick) {
-        // Move the ball without considering walls and floors
+    public void move(int[][] rects, int[][] lightFloors, int dt) {
+        // Move the Player without considering walls and floors
         if ((xSpd > 6 && xJrk > 0) || (xSpd < -6 && xJrk < 0)) {
             xAcc = 0;
         }
@@ -96,16 +100,16 @@ public class Player {
             }
             
             // Check for collisions with floors
-            if (canHitFloor && Math.abs(centerY - getCenterY()) < (length + rect[3]) / 2.0 + 1) {
+            if (canHitFloor && Math.abs(centerY - getCenterY()) < (height + rect[3]) / 2.0 + 1) {
                 if (getPrevTopY() > rect[1] + rect[3]) {
                     y = rect[1] + rect[3] + 1;
                     ySpd = 0;
                 }
                 else if (getPrevBottomY() <= rect[1]) {
-                    y = rect[1] - length - 1;
-                    // Add 0.9x times the vertical velocity to the horizontal velocity (wavedash)
+                    y = rect[1] - height - 1;
+                    // Wavedash
                     if (isAirDodging) {
-                        xSpd += xSpd > 0 ? 0.9 * ySpd : -0.9 * ySpd;
+                        waveDash();
                     }
                     ySpd = 0;
                 }
@@ -126,11 +130,11 @@ public class Player {
 
             // Next, ensure the Player doesn't go through a light floor
             if (getBottomY() >= floor[1] && getPrevBottomY() < floor[1]) {
-                y = floor[1] - length - 1;
+                y = floor[1] - height  - 1;
                 
-                // Add 0.9x the vertical velocity to the horizontal velocity (wavedash)
+                // Wavedash
                 if (isAirDodging) {
-                    xSpd += xSpd > 0.9 ? ySpd : -0.9 * ySpd;
+                    waveDash();
                 }
                 ySpd = 0;
             }
@@ -148,6 +152,11 @@ public class Player {
         if (airDodgeTimeCounter >= 12) {
             endAirDodge();
             xSpd = 0;
+        }
+
+        // Revert back to being a square after wavedashing
+        if (isWaveDashing && (!isAirDodging || !isGrounded)) {
+            endWaveDash();
         }
     }
 
@@ -193,6 +202,26 @@ public class Player {
         airDodgeTimeCounter = 0;
     }
 
+    // Do a wave dash
+    public void waveDash() {
+        // Add 0.9x the ySpd to the xSpd
+        xSpd += xSpd > 0 ? 0.9 * ySpd : -0.9 * ySpd;
+        
+        // Make the Player a rectangle
+        height = (int) (length / 2 + 0.5);
+        y += length / 2;
+
+        isWaveDashing = true;
+    }
+
+    // End a wave dash
+    public void endWaveDash() {
+        height = length;
+        y -= length / 2;
+        isWaveDashing = false;
+    }
+
+    // Start moving right
     public void moveRight() {
         if (!movingRight) {
             xJrk += 3;
@@ -227,6 +256,7 @@ public class Player {
             return;
         }
 
+        // Make the Player go left if they're going right
         if (xSpd > 0) {
             xAcc -= Math.abs(-0.5 * xSpd + 13);
 
@@ -235,6 +265,7 @@ public class Player {
                 xAcc = 0;
             }
         }
+        // Make the player go right if they're going left
         else if (xSpd < 0) {
             xAcc += Math.abs(-0.5 * xSpd + 13);
 
@@ -276,11 +307,11 @@ public class Player {
     }
 
     public int getBottomY() {
-        return (int) (y + length + 0.5);
+        return (int) (y + height + 0.5);
     }
 
     public int getPrevBottomY() {
-        return (int) (y + length - ySpd + 0.5);
+        return (int) (y + height - ySpd + 0.5);
     }
 
     public double getCenterX() {
@@ -288,7 +319,7 @@ public class Player {
     }
 
     public double getCenterY() {
-        return y + length / 2.0;
+        return y + height / 2.0;
     }
 
     // Auto-generated getters and setters
