@@ -150,11 +150,14 @@ public class Player {
         }
         if (airDodgeTimeCounter >= 12) {
             endAirDodge();
-            xSpd = 0;
+            // TODO: Keep momentum after wavedashing in the air
+            if (!isWaveDashing || isGrounded) {
+                xSpd = 0;
+            }
         }
 
         // Revert back to being a square after wavedashing
-        if (isWaveDashing && (!isAirDodging || !isGrounded)) {
+        if (isWaveDashing && (!isAirDodging)) {
             endWaveDash();
         }
     }
