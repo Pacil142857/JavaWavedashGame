@@ -179,6 +179,9 @@ public class Player {
             return;
         }
 
+        // Change the fill color of the Player
+        fillColor = new Color(0xbe, 0xee, 0xef);
+
         // Set the direction of the airdodge based on which way the user is holding
         // default is down-right, but it can down-left too
         double direction = 3.9;
@@ -195,6 +198,7 @@ public class Player {
 
     // End an air dodge
     public void endAirDodge() {
+        fillColor = Color.WHITE;
         yAcc = 45;
         ySpd = 0;
         isAirDodging = false;
