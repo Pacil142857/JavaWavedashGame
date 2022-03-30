@@ -28,6 +28,18 @@ public class Goal {
         g.fillPolygon(xPoints, yPoints, 3);
     }
 
+    // Set the location of the goal
+    public void setLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // Set the size of the goal
+    public void setSize(int width, int height) {
+        this.w = width;
+        this.h = height;
+    }
+
     // Check if the goal is touching a Player
     public boolean isTouchingPlayer(Player p) {
         // Check if the Player is too high or low to reach the goal

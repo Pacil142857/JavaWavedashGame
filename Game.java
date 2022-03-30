@@ -67,7 +67,8 @@ public class Game extends JPanel{
         goal.draw(g);
 
         // Form the maps
-        map.drawMap1(g);
+        map.formMap1(g, player, goal);
+        map.drawMap(g);
 
         // Create the timer
         timer = new Timer(dt, new TimerListener());
@@ -92,7 +93,7 @@ public class Game extends JPanel{
             goal.draw(g);
 
             if (goal.isTouchingPlayer(player)) {
-                // TODO: Go to next map upon reaching the goal
+                map.toNextMap(g, player, goal);
             }
 
             repaint();

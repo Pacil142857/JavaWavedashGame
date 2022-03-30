@@ -6,7 +6,6 @@
   - [ ] Give air dodges invulnerability
 - [ ] Add death counter
 - [ ] Add looping background music
-- [ ] Cycle through levels
 
 ## Additional Features
 
@@ -20,3 +19,4 @@
 - [x] Make the Player smaller upon wavedashing
 - [x] Add premade maps
 - [x] Add goals
+- [x] Cycle through levels

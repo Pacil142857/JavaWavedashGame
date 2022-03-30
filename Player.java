@@ -255,6 +255,14 @@ public class Player {
         movingLeft = false;
     }
 
+    // Stop moving
+    public void resetSpeed() {
+        xSpd = 0;
+        ySpd = 0;
+        xAcc = 0;
+        yAcc = 45;
+    }
+
     // Apply friction
     public void applyFriction(int dt) {
         if (isAirDodging) {

@@ -7,11 +7,29 @@ public class PremadeMap {
     private int h;
     private int[][] rects;
     private int[][] lightFloors;
+    private int mapNum = 1;
 
     // Create a PremadeMap with a given width and height
     public PremadeMap(int width, int height) {
         this.w = width;
         this.h = height;
+    }
+
+    public void toNextMap(Graphics g, Player p, Goal goal) {
+        mapNum++;
+        switch (mapNum) {
+            case 2:
+                formMap2(g, p, goal);
+                break;
+            case 3:
+                formMap3(g, p, goal);
+                break;
+            default:
+                formMap1(g, p, goal);
+                mapNum = 1;
+                break;
+        }
+        drawMap(g);
     }
 
     public void drawMap(Graphics g) {
@@ -25,7 +43,11 @@ public class PremadeMap {
     }
 
     // A basic map where wavedashing is not required
-    public void formMap1(Graphics g) {
+    public void formMap1(Graphics g, Player p, Goal goal) {
+        p.setLocation(50, h - 100);
+        p.resetSpeed();
+        goal.setLocation(w - 100, h - 260);
+        goal.setSize(40, 100);
         map = new Map(7, 1);
         addBorder(map);
 
@@ -40,7 +62,11 @@ public class PremadeMap {
     }
 
     // Another basic map where wavedashing is required
-    public void formMap2(Graphics g) {
+    public void formMap2(Graphics g, Player p, Goal goal) {
+        p.setLocation(50, h - 100);
+        p.resetSpeed();
+        goal.setLocation(w - 100, h - 150);
+        goal.setSize(40, 100);
         map = new Map(6, 2);
         addBorder(map);
 
@@ -56,7 +82,11 @@ public class PremadeMap {
     }
 
     // A map that teaches the Player to jump cancel wavedashes
-    public void formMap3(Graphics g) {
+    public void formMap3(Graphics g, Player p, Goal goal) {
+        p.setLocation(50, h - 100);
+        p.resetSpeed();
+        goal.setLocation(w - 100, h - 310);
+        goal.setSize(40, 100);
         map = new Map(6, 3);
         addBorder(map);
 
