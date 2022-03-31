@@ -22,3 +22,4 @@
 - [x] Cycle through levels
 - [x] Add hazards and death
   - [x] Give air dodges invulnerability
+- [x] Add a buffer to jumping to make wavedashing easier

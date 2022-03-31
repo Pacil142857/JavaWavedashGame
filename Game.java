@@ -34,7 +34,7 @@ public class Game extends JPanel{
                     player.moveLeft();
                     break;
                 case ' ':
-                    player.jump(11);
+                    player.startJump();
                     break;
                 case 'n':
                     player.airDodge();
@@ -67,7 +67,7 @@ public class Game extends JPanel{
         goal.draw(g);
 
         // Form the maps
-        map.formMap4(g, player, goal);
+        map.formMap1(g, player, goal);
         map.drawMap(g);
 
         // Create the timer

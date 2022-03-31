@@ -127,7 +127,7 @@ public class PremadeMap {
         map.addRect(700, h - 370, w - 725, 320);
 
         map.addHazard(new Saw(300, h - 250, 100, Color.RED));
-        map.addHazard(new Saw(675, h - 440, 15, Color.RED));
+        map.addHazard(new Saw(675, h - 455, 15, Color.RED));
 
         setVariables(map);
     }

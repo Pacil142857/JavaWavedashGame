@@ -9,6 +9,7 @@ public class Player {
     private int spawnPointX;
     private int spawnPointY;
     private int numDeaths;
+    private int jumpCounter = 0;
     private Color fillColor;
     private Color outlineColor;
     private double xSpd;
@@ -21,6 +22,7 @@ public class Player {
     private boolean isAirDodging = false;
     private boolean isGrounded = false;
     private boolean isWaveDashing = false;
+    private boolean willJump = false;
     private int airDodgeTimeCounter = 0;
 
     // Create a white Player with a black outline at (0, 0) with length 20
@@ -73,6 +75,18 @@ public class Player {
         y += ySpd;
         xSpd += xAcc * dt / 1000;
         ySpd += yAcc * dt / 1000;
+
+        if (willJump) {
+            jumpCounter++;
+        }
+
+        if (jumpCounter >= 2) {
+            if (!isAirDodging) {
+                jump();
+            }
+            willJump = false;
+            jumpCounter = 0;
+        }
 
         isGrounded = false;
         boolean canHitWall;
@@ -151,9 +165,10 @@ public class Player {
         if (isAirDodging) {
             airDodgeTimeCounter++;
         }
+
+        // End the air dodge and canceel the momentum (unless Player is wavedashing in the air)
         if (airDodgeTimeCounter >= 12) {
             endAirDodge();
-            // TODO: Keep momentum after wavedashing in the air
             if (!isWaveDashing || isGrounded) {
                 xSpd = 0;
             }
@@ -165,15 +180,25 @@ public class Player {
         }
     }
 
-    // Jump with a certain speed
-    public void jump(double speed) {
+    // Start a jump
+    public void startJump() {
+        if (!willJump && isGrounded && !isAirDodging) {
+            willJump = true;
+        }
+        else if (isAirDodging) {
+            jump();
+        }
+    }
+
+    // Jump
+    public void jump() {
         if (isGrounded) {
             // When jumping out of an air dodge, cancel the air dodge
             if (isAirDodging) {
                 endAirDodge();
             }
 
-            ySpd = -speed;
+            ySpd = -11;
             xAcc = 0;
         }
     }
@@ -181,7 +206,7 @@ public class Player {
     // Air dodge with a certain direction
     public void airDodge() {
         // Don't air dodge if the Player is grounded
-        if (isGrounded) {
+        if (isGrounded && !willJump) {
             return;
         }
 
