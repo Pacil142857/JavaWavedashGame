@@ -6,6 +6,9 @@ public class Player {
     private double y;
     private int length;
     private int height;
+    private int spawnPointX;
+    private int spawnPointY;
+    private int numDeaths;
     private Color fillColor;
     private Color outlineColor;
     private double xSpd;
@@ -289,10 +292,20 @@ public class Player {
         }
     }
 
+    public void respawn() {
+        resetSpeed();
+        setLocation(spawnPointX, spawnPointY);
+    }
+
     // Custom getters and setters
     public void setLocation(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+
+    public void setSpawnPoint(int x, int y) {
+        this.spawnPointX = x;
+        this.spawnPointY = y;
     }
 
     public int getLeftX() {
@@ -337,6 +350,14 @@ public class Player {
 
     // Auto-generated getters and setters
     // TODO: Re-generate these
+    public int getNumDeaths() {
+        return this.numDeaths;
+    }
+
+    public void setNumDeaths(int numDeaths) {
+        this.numDeaths = numDeaths;
+    }
+
     public double getX() {
         return this.x;
     }

@@ -67,7 +67,7 @@ public class Game extends JPanel{
         goal.draw(g);
 
         // Form the maps
-        map.formMap1(g, player, goal);
+        map.formMap4(g, player, goal);
         map.drawMap(g);
 
         // Create the timer
@@ -86,12 +86,23 @@ public class Game extends JPanel{
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, WIDTH, HEIGHT);
 
-            // Draw the map & player, and make the player move
+            // Draw the map and make the player move
             map.drawMap(g);
             player.move(map.getRects(), map.getLightFloors(), dt);
+
+            // Check if the Player died
+            for (Hazard haz : map.getHazards()) {
+                if (haz.isTouchingPlayer(player)) {
+                    haz.killPlayer(player);
+                    break;
+                }
+            }
+
+            // Draw the Player and the goal
             player.draw(g);
             goal.draw(g);
 
+            // If the Player reached the goal, go to the next map
             if (goal.isTouchingPlayer(player)) {
                 map.toNextMap(g, player, goal);
             }

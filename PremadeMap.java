@@ -7,6 +7,7 @@ public class PremadeMap {
     private int h;
     private int[][] rects;
     private int[][] lightFloors;
+    private Hazard[] hazards;
     private int mapNum = 1;
 
     // Create a PremadeMap with a given width and height
@@ -23,6 +24,9 @@ public class PremadeMap {
                 break;
             case 3:
                 formMap3(g, p, goal);
+                break;
+            case 4:
+                formMap4(g, p, goal);
                 break;
             default:
                 formMap1(g, p, goal);
@@ -42,10 +46,17 @@ public class PremadeMap {
         map.addRect(w - 25, 0, 25, h - 50);
     }
 
+    // Set the variables of this to match a Map
+    public void setVariables(Map map) {
+        rects = map.getRects();
+        lightFloors = map.getLightFloors();
+        hazards = map.getHazards();
+    }
+
     // A basic map where wavedashing is not required
     public void formMap1(Graphics g, Player p, Goal goal) {
-        p.setLocation(50, h - 100);
-        p.resetSpeed();
+        p.setSpawnPoint(50, h - 100);
+        p.respawn();
         goal.setLocation(w - 100, h - 260);
         goal.setSize(40, 100);
         map = new Map(7, 1);
@@ -57,14 +68,13 @@ public class PremadeMap {
         map.addLightFloor(370, h - 230, 280);
         map.addRect(700, h - 160, w - 700, 110);
 
-        rects = map.getRects();
-        lightFloors = map.getLightFloors();
+        setVariables(map);
     }
 
     // Another basic map where wavedashing is required
     public void formMap2(Graphics g, Player p, Goal goal) {
-        p.setLocation(50, h - 100);
-        p.resetSpeed();
+        p.setSpawnPoint(50, h - 100);
+        p.respawn();
         goal.setLocation(w - 100, h - 150);
         goal.setSize(40, 100);
         map = new Map(6, 2);
@@ -77,14 +87,13 @@ public class PremadeMap {
         map.addLightFloor(450, h - 110, 50);
         map.addLightFloor(300, h - 190, 50);
 
-        rects = map.getRects();
-        lightFloors = map.getLightFloors();
+        setVariables(map);
     }
 
     // A map that teaches the Player to jump cancel wavedashes
     public void formMap3(Graphics g, Player p, Goal goal) {
-        p.setLocation(50, h - 100);
-        p.resetSpeed();
+        p.setSpawnPoint(50, h - 100);
+        p.respawn();
         goal.setLocation(w - 100, h - 310);
         goal.setSize(40, 100);
         map = new Map(6, 3);
@@ -98,8 +107,29 @@ public class PremadeMap {
         map.addLightFloor(600, h - 130, 50);
         map.addRect(850, h - 210, w - 775, 160);
 
-        rects = map.getRects();
-        lightFloors = map.getLightFloors();
+        setVariables(map);
+    }
+
+    // A map that uses hazards and teaches the Player to waveland
+    public void formMap4(Graphics g, Player p, Goal goal) {
+        p.setSpawnPoint(50, h - 300);
+        p.respawn();
+        goal.setLocation(w - 100, h - 470);
+        goal.setSize(40, 100);
+        map = new Map(6, 2, 2);
+        addBorder(map);
+
+        map.addRect(25, h - 250, 275, 200);
+        map.addRect(500, h - 250, 200, 200);
+
+        map.addLightFloor(675, h - 330, 25);
+        map.addLightFloor(675, h - 370, 25);
+        map.addRect(700, h - 370, w - 725, 320);
+
+        map.addHazard(new Saw(300, h - 250, 100, Color.RED));
+        map.addHazard(new Saw(675, h - 440, 15, Color.RED));
+
+        setVariables(map);
     }
 
     // Getters
@@ -109,5 +139,9 @@ public class PremadeMap {
 
     public int[][] getLightFloors() {
         return lightFloors;
+    }
+
+    public Hazard[] getHazards() {
+        return hazards;
     }
 }

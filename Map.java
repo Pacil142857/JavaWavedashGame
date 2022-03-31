@@ -4,6 +4,7 @@ import java.awt.Graphics;
 public class Map {
     private int[][] rects;
     private int[][] lightFloors;
+    private Hazard[] hazards;
     private Color fillColor;
     private Color outlineColor;
 
@@ -11,14 +12,25 @@ public class Map {
     public Map(int numRects, int numLightFloors) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
+        this.hazards = new Hazard[0];
         this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
     }
 
-    // Create a map with certain colors and a given number of rectangles and light floors
-    public Map(int numRects, int numLightFloors, Color fillColor, Color outlineColor) {
+    // Create a map with a given number of rectangles, light floors, and hazards
+    public Map (int numRects, int numLightFloors, int numHazards) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
+        this.hazards = new Hazard[numHazards];
+        this.fillColor = Color.BLACK;
+        this.outlineColor = Color.BLACK;
+    }
+
+    // Create a map with certain colors and a given number of rectangles, light floors, and hazards
+    public Map(int numRects, int numLightFloors, int numHazards, Color fillColor, Color outlineColor) {
+        this.rects = new int[numRects][4];
+        this.lightFloors = new int[numLightFloors][3];
+        this.hazards = new Hazard[numHazards];
         this.fillColor = fillColor;
         this.outlineColor = outlineColor;
     }
@@ -52,7 +64,18 @@ public class Map {
         }
     }
 
-    // Draw all rectangles and light floors
+    // Add a hazard to the map
+    public void addHazard(Hazard haz) {
+        // Find the first hazard that hasn't been initialized and set it to this hazard
+        for (int i = 0; i < hazards.length; i++) {
+            if (hazards[i] == null) {
+                hazards[i] = haz;
+                break;
+            }
+        }
+    }
+
+    // Draw the map
     public void drawMap(Graphics g) {
         // First, fill the rectangles
         g.setColor(fillColor);
@@ -67,6 +90,11 @@ public class Map {
         }
         for (int[] floor : lightFloors) {
             g.drawLine(floor[0], floor[1], floor[2], floor[1]);
+        }
+
+        // Then, draw the hazards
+        for (Hazard haz : hazards) {
+            haz.draw(g);
         }
     }
 
@@ -87,6 +115,14 @@ public class Map {
         this.lightFloors = lightFloors;
     }
 
+    public Hazard[] getHazards() {
+        return this.hazards;
+    }
+
+    public void setHazards(Hazard[] hazards) {
+        this.hazards = hazards;
+    }
+
     public Color getFillColor() {
         return this.fillColor;
     }
@@ -101,5 +137,5 @@ public class Map {
 
     public void setOutlineColor(Color outlineColor) {
         this.outlineColor = outlineColor;
-    }
+    }    
 }
