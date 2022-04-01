@@ -3,14 +3,17 @@
 ## Core Features
 
 - [ ] Add death counter
-- [ ] Add looping background music
 - [ ] Add text to maps
 
 ## Additional Features
 
 - [ ] Add vertical wavedashes (may not be a good idea)
 - [ ] Allow the Player to drop through light floors (not required)
-- [ ] Optimize performance in addX methods in Map classz
+- [ ] Optimize performance in addX methods in Map class
+
+## Fixes
+
+- [ ] Fix Player dropping through floor if jumping while inside a wall
 
 ## Completed
 
@@ -23,3 +26,4 @@
 - [x] Add hazards and death
   - [x] Give air dodges invulnerability
 - [x] Add a buffer to jumping to make wavedashing easier
+- [x] Add looping background music

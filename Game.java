@@ -22,6 +22,7 @@ public class Game extends JPanel{
     private Player player;
     private PremadeMap map;
     private Goal goal;
+    private Song song;
 
     // Have the Player do things when certain buttons are pressed
     private class Keyboard implements KeyListener {
@@ -70,6 +71,10 @@ public class Game extends JPanel{
         map.formMap1(g, player, goal);
         map.drawMap(g);
 
+        // Create a Song
+        song = new Song("Animation Project\\intro1.wav", "Animation Project\\loop1.wav");
+        song.playIntro();
+
         // Create the timer
         timer = new Timer(dt, new TimerListener());
         timer.start();
@@ -106,6 +111,9 @@ public class Game extends JPanel{
             if (goal.isTouchingPlayer(player)) {
                 map.toNextMap(g, player, goal);
             }
+
+            // Loop the song
+            song.loop();
 
             repaint();
         }
