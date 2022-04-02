@@ -75,7 +75,7 @@ public class PremadeMap {
     public void formMap2(Graphics g, Player p, Goal goal) {
         p.setSpawnPoint(50, h - 100);
         p.respawn();
-        goal.setLocation(w - 100, h - 150);
+        goal.setLocation(w - 300, h - 150);
         goal.setSize(40, 100);
         map = new Map(6, 2);
         addBorder(map);
@@ -116,7 +116,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 470);
         goal.setSize(40, 100);
-        map = new Map(6, 2, 2);
+        map = new Map(6, 2, 3);
         addBorder(map);
 
         map.addRect(25, h - 250, 275, 200);
@@ -128,6 +128,7 @@ public class PremadeMap {
 
         map.addHazard(new Saw(300, h - 250, 100, Color.RED));
         map.addHazard(new Saw(675, h - 455, 15, Color.RED));
+        map.addHazard(new Spikes(650, h - 260, 50, 10, 5));
 
         setVariables(map);
     }
