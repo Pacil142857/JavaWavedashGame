@@ -113,7 +113,7 @@ public class Game extends JPanel{
             }
 
             // Loop the song
-            song.loop();
+            song.loop(544768);
 
             repaint();
         }

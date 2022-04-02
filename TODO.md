@@ -4,6 +4,7 @@
 
 - [ ] Add death counter
 - [ ] Add text to maps
+- [ ] Add spikes
 
 ## Additional Features
 
@@ -14,6 +15,7 @@
 ## Fixes
 
 - [ ] Fix Player dropping through floor if jumping while inside a wall
+- [ ] Fix friction acting weirdly when changing directions twice quickly
 
 ## Completed
 

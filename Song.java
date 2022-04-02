@@ -33,12 +33,12 @@ public class Song {
     }
     
     // Start looping the song and finish the intro
-    public void loop() {
-        if (introFinished || intro.isRunning()) {
+    public void loop(long loopSample) {
+        if (introFinished || intro.getLongFramePosition() < loopSample) {
             return;
         }
 		introFinished = true;
-        loop.setFramePosition(0);
+        loop.setFramePosition((int) (intro.getLongFramePosition() - loopSample));
         loop.start();
         loop.loop(Clip.LOOP_CONTINUOUSLY);
         intro.stop();
