@@ -23,6 +23,7 @@ public class Player {
     private boolean isGrounded = false;
     private boolean isWaveDashing = false;
     private boolean willJump = false;
+    private boolean canAirDodge = true;
     private int airDodgeTimeCounter = 0;
 
     // Create a white Player with a black outline at (0, 0) with length 20
@@ -144,6 +145,9 @@ public class Player {
             // Check if the player is grounded
             if (canHitFloor && getBottomY() + 1 == rect[1]) {
                 isGrounded = true;
+                if (!isWaveDashing) {
+                    canAirDodge = true;
+                }
             }
         }
 
@@ -168,6 +172,9 @@ public class Player {
             // Check if the player is grounded
             if (getBottomY() + 1 == floor[1]) {
                 isGrounded = true;
+                if (!isWaveDashing) {
+                    canAirDodge = true;
+                }
             }
         }
 
@@ -207,7 +214,7 @@ public class Player {
             if (isAirDodging) {
                 endAirDodge();
             }
-
+            canAirDodge = true;
             ySpd = -11;
             xAcc = 0;
         }
@@ -215,8 +222,8 @@ public class Player {
 
     // Air dodge with a certain direction
     public void airDodge() {
-        // Don't air dodge if the Player is grounded
-        if (isGrounded && !willJump) {
+        // Don't air dodge if the Player is grounded or has already air dodged while in the air
+        if (!canAirDodge || (isGrounded && !willJump)) {
             return;
         }
 
@@ -235,6 +242,7 @@ public class Player {
         xSpd = 6 * Math.cos(direction);
         ySpd = -6 * Math.sin(direction);
         isAirDodging = true;
+        canAirDodge = false;
     }
 
     // End an air dodge
@@ -256,6 +264,7 @@ public class Player {
         y += length / 2;
 
         isWaveDashing = true;
+        canAirDodge = false;
     }
 
     // End a wave dash

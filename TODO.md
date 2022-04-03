@@ -12,11 +12,11 @@
 - [ ] Optimize performance in addX methods in Map class
 - [ ] Add upside-down spikes
 - [ ] Add moving hazards
+- [ ] Give the saws an image so they actually look like saws
 
 ## Fixes
 
 - [ ] Fix friction acting weirdly when changing directions twice quickly (could be working fine and that friction just feels weird)
-- [ ] Prevent the Player from air dodging multiple times in the air
 
 ## Completed
 
@@ -34,3 +34,4 @@
 - [x] Fix wavedashes going the wrong way when wavedashing onto the corner of a platform or into a wall
 - [x] Fix Player dropping through floor if jumping while inside a wall
 - [x] Make going to a new map completely reset the Player's state
+- [x] Prevent the Player from air dodging multiple times in the air
