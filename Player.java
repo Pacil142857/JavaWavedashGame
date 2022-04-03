@@ -100,20 +100,6 @@ public class Player {
 
             centerX = rect[0] + rect[2] / 2.0;
             centerY = rect[1] + rect[3] / 2.0;
-
-            // Check for collisions with walls
-            if (canHitWall && Math.abs(centerX - getCenterX()) < (length + rect[2]) / 2.0 + 1) {
-                if (getPrevRightX() < rect[0]) {
-                    x = rect[0] - length - 1;
-                    xSpd = 0;
-                    xAcc = 0;
-                }
-                else if (getPrevLeftX() > rect[0] + rect[2]){
-                    x = rect[0] + rect[2] + 1;
-                    xSpd = 0;
-                    xAcc = 0;
-                }
-            }
             
             // Check for collisions with floors
             if (canHitFloor && Math.abs(centerY - getCenterY()) < (height + rect[3]) / 2.0 + 1) {
@@ -128,6 +114,24 @@ public class Player {
                         waveDash();
                     }
                     ySpd = 0;
+                }
+            }
+
+            // Check for collisions with walls
+            if (canHitWall && Math.abs(centerX - getCenterX()) < (length + rect[2]) / 2.0 + 1) {
+                if (getPrevRightX() < rect[0]) {
+                    x = rect[0] - length - 1;
+                    if (!isAirDodging) {
+                        xSpd = 0;
+                        xAcc = 0;
+                    }
+                }
+                else if (getPrevLeftX() > rect[0] + rect[2]){
+                    x = rect[0] + rect[2] + 1;
+                    if (!isAirDodging) {
+                        xSpd = 0;
+                        xAcc = 0;
+                    }
                 }
             }
 

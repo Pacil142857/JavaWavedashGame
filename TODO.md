@@ -11,12 +11,12 @@
 - [ ] Allow the Player to drop through light floors (not required)
 - [ ] Optimize performance in addX methods in Map class
 - [ ] Add upside-down spikes
+- [ ] Add moving hazards
 
 ## Fixes
 
 - [ ] Fix Player dropping through floor if jumping while inside a wall
 - [ ] Fix friction acting weirdly when changing directions twice quickly
-- [ ] Fix wavedashes going the wrong way when wavedashing onto the corner of a platform
 
 ## Completed
 
@@ -31,3 +31,4 @@
   - [x] Add spikes
 - [x] Add a buffer to jumping to make wavedashing easier
 - [x] Add looping background music
+- [x] Fix wavedashes going the wrong way when wavedashing onto the corner of a platform or into a wall
