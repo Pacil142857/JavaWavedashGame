@@ -33,7 +33,6 @@ public class PremadeMap {
                 mapNum = 1;
                 break;
         }
-        drawMap(g);
     }
 
     public void drawMap(Graphics g) {

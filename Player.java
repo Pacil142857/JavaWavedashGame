@@ -71,6 +71,7 @@ public class Player {
             xAcc += xJrk;
         }
         applyFriction(dt);
+        double prevY = y;
         x += xSpd;
         y += ySpd;
         xSpd += xAcc * dt / 1000;
@@ -103,7 +104,7 @@ public class Player {
             
             // Check for collisions with floors
             if (canHitFloor && Math.abs(centerY - getCenterY()) < (height + rect[3]) / 2.0 + 1) {
-                if (getPrevTopY() > rect[1] + rect[3]) {
+                if (prevY > rect[1] + rect[3]) {
                     y = rect[1] + rect[3] + 1;
                     ySpd = 0;
                 }
@@ -113,6 +114,11 @@ public class Player {
                     if (isAirDodging) {
                         waveDash();
                     }
+                    ySpd = 0;
+                }
+                // Hacky solution to stop the Player from teleporting underneath the floor if they're in a wall and jump
+                else if (getTopY() <= rect[1] + rect[3] && getBottomY() > rect[1] + rect[3] && !isAirDodging) {
+                    y  = prevY;
                     ySpd = 0;
                 }
             }
@@ -355,10 +361,6 @@ public class Player {
 
     public int getTopY() {
         return (int) (y + 0.5);
-    }
-
-    public int getPrevTopY() {
-        return (int) (y - ySpd + 0.5);
     }
 
     public int getBottomY() {
