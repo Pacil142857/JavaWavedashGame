@@ -28,6 +28,9 @@ public class PremadeMap {
             case 4:
                 formMap4(g, p, goal);
                 break;
+            case 5:
+                formMap5(g, p, goal);
+                break;
             default:
                 formMap1(g, p, goal);
                 mapNum = 1;
@@ -128,6 +131,28 @@ public class PremadeMap {
         map.addHazard(new Saw(300, h - 250, 100, Color.RED));
         map.addHazard(new Saw(675, h - 455, 15, Color.RED));
         map.addHazard(new Spikes(650, h - 260, 50, 10, 5));
+
+        setVariables(map);
+    }
+
+    // A map that teaches the Player that air dodges and wavedashes are invincible and that momentum is kept after wavedashing off an edge
+    public void formMap5(Graphics g, Player p, Goal goal) {
+        p.setSpawnPoint(50, h - 471);
+        p.respawn();
+        goal.setLocation(w - 100, h - 150);
+        goal.setSize(40, 100);
+        map = new Map(5, 0, 4);
+        addBorder(map);
+
+        // Add the elevated floor, wall coming from the ceiling, and spikes
+        map.addRect(25, h - 450, 375, 400);
+        map.addRect(99, 0, 2, h - 465);
+        map.addHazard(new Spikes(90, h - 455, 20, 5, 4));
+        map.addHazard(new Spikes(380, h - 455, 20, 5, 4));
+
+        // Add a saw and the last set of spikes
+        map.addHazard(new Saw(340, h - 680, 100, Color.RED));
+        map.addHazard(new Spikes(400, h - 60, 300, 10, 30));
 
         setVariables(map);
     }

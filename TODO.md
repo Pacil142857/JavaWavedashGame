@@ -16,6 +16,8 @@
 ## Fixes
 
 - [ ] Fix friction acting weirdly when changing directions twice quickly (could be working fine and that friction just feels weird)
+- [ ] Prevent the Player from air dodging multiple times in the air
+- [ ] Make going to a new map completely reset the Player's state
 
 ## Completed
 
