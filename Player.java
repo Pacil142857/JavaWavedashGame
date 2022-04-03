@@ -329,6 +329,8 @@ public class Player {
 
     public void respawn() {
         resetSpeed();
+        endAirDodge();
+        endWaveDash();
         setLocation(spawnPointX, spawnPointY);
     }
 

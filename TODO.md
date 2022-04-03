@@ -17,7 +17,6 @@
 
 - [ ] Fix friction acting weirdly when changing directions twice quickly (could be working fine and that friction just feels weird)
 - [ ] Prevent the Player from air dodging multiple times in the air
-- [ ] Make going to a new map completely reset the Player's state
 
 ## Completed
 
@@ -34,3 +33,4 @@
 - [x] Add looping background music
 - [x] Fix wavedashes going the wrong way when wavedashing onto the corner of a platform or into a wall
 - [x] Fix Player dropping through floor if jumping while inside a wall
+- [x] Make going to a new map completely reset the Player's state
