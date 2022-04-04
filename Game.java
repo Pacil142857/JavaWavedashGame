@@ -61,6 +61,9 @@ public class Game extends JPanel{
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = image.getGraphics();
 
+        // Set the font
+        g.setFont(new Font("Arial", Font.PLAIN, 20));
+
         // Create a Player and a Map
         player = new Player(50, HEIGHT - 100);
         map = new PremadeMap(WIDTH, HEIGHT);

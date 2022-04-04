@@ -2,8 +2,7 @@
 
 ## Core Features
 
-- [ ] Add death counter
-- [ ] Add text to maps
+- [ ] Add more maps
 
 ## Additional Features
 
@@ -35,3 +34,4 @@
 - [x] Fix Player dropping through floor if jumping while inside a wall
 - [x] Make going to a new map completely reset the Player's state
 - [x] Prevent the Player from air dodging multiple times in the air
+- [x] Add text to maps

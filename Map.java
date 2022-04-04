@@ -7,30 +7,34 @@ public class Map {
     private Hazard[] hazards;
     private Color fillColor;
     private Color outlineColor;
+    private Text[] texts;
 
-    // Create a map with a given number of rectangles and light floors
-    public Map(int numRects, int numLightFloors) {
+    // Create a map with a given number of rectangles, light floors, and texts
+    public Map(int numRects, int numLightFloors, int numTexts) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[0];
+        this.texts = new Text[numTexts];
         this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
     }
 
-    // Create a map with a given number of rectangles, light floors, and hazards
-    public Map (int numRects, int numLightFloors, int numHazards) {
+    // Create a map with a given number of rectangles, light floors, texts, and hazards
+    public Map (int numRects, int numLightFloors, int numTexts, int numHazards) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[numHazards];
+        this.texts = new Text[numTexts];
         this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
     }
 
-    // Create a map with certain colors and a given number of rectangles, light floors, and hazards
-    public Map(int numRects, int numLightFloors, int numHazards, Color fillColor, Color outlineColor) {
+    // Create a map with certain colors and a given number of rectangles, light floors, texts, and hazards
+    public Map(int numRects, int numLightFloors, int numTexts, int numHazards, Color fillColor, Color outlineColor) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[numHazards];
+        this.texts = new Text[numTexts];
         this.fillColor = fillColor;
         this.outlineColor = outlineColor;
     }
@@ -64,6 +68,16 @@ public class Map {
         }
     }
 
+    // Add text to the map
+    public void addText(Text text) {
+        for (int i = 0; i < texts.length; i++) {
+            if (texts[i] == null) {
+                texts[i] = text;
+                break;
+            }
+        }
+    }
+
     // Add a hazard to the map
     public void addHazard(Hazard haz) {
         // Find the first hazard that hasn't been initialized and set it to this hazard
@@ -77,13 +91,13 @@ public class Map {
 
     // Draw the map
     public void drawMap(Graphics g) {
-        // First, fill the rectangles
+        // Fill the rectangles
         g.setColor(fillColor);
         for (int[] rect : rects) {
             g.fillRect(rect[0], rect[1], rect[2], rect[3]);
         }
 
-        // Next, outline the rectangles and draw the light floors
+        // Outline the rectangles and draw the light floors
         g.setColor(outlineColor);
         for (int[] rect : rects) {
             g.drawRect(rect[0], rect[1], rect[2], rect[3]);
@@ -92,9 +106,15 @@ public class Map {
             g.drawLine(floor[0], floor[1], floor[2], floor[1]);
         }
 
-        // Then, draw the hazards
+        // Draw the hazards
         for (Hazard haz : hazards) {
             haz.draw(g);
+        }
+
+        // Write out text
+        for (Text text : texts) {
+            g.setColor(text.getColor());
+            g.drawString(text.getStr(), text.getX(), text.getY());
         }
     }
 
@@ -137,5 +157,13 @@ public class Map {
 
     public void setOutlineColor(Color outlineColor) {
         this.outlineColor = outlineColor;
-    }    
+    }
+
+    public Text[] getTexts() {
+        return texts;
+    }
+
+    public void setTexts(Text[] texts) {
+        this.texts = texts;
+    }
 }
