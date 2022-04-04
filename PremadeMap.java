@@ -226,7 +226,7 @@ public class PremadeMap {
         map.addLightFloor(650, h - 170, 50);
         map.addLightFloor(830, h - 250, 50);
         map.addLightFloor(970, h - 330, 50);
-        map.addRect(854, h - 410, 2, 145);
+        map.addRect(854, h - 409, 2, 145);
         map.addLightFloor(830, h - 410, 50);
         
         // Add the spikes
