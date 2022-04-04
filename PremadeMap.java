@@ -8,6 +8,7 @@ public class PremadeMap {
     private int[][] rects;
     private int[][] lightFloors;
     private Hazard[] hazards;
+    private Text[] texts;
     private int mapNum = 1;
 
     // Create a PremadeMap with a given width and height
@@ -31,6 +32,9 @@ public class PremadeMap {
             case 5:
                 formMap5(g, p, goal);
                 break;
+            case 6:
+                formMap6(g, p, goal);
+                break;
             default:
                 formMap1(g, p, goal);
                 mapNum = 1;
@@ -53,6 +57,7 @@ public class PremadeMap {
         rects = map.getRects();
         lightFloors = map.getLightFloors();
         hazards = map.getHazards();
+        texts = map.getTexts();
     }
 
     // A basic map where wavedashing is not required
@@ -171,6 +176,30 @@ public class PremadeMap {
         setVariables(map);
     }
 
+    // The first non-tutorial map! The Player scales upward, and the goal is uniquely on the left
+    public void formMap6(Graphics g, Player p, Goal goal) {
+        p.setSpawnPoint(50, h - 121);
+        p.respawn();
+        goal.setLocation(50, h - 650);
+        goal.setSize(40, 100);
+        map = new Map(5, 5, 0, 1);
+        addBorder(map);
+
+        // Add the Player's floor, the goal's floor, and the spikes
+        map.addRect(25, h - 100, 125, 50);
+        map.addRect(25, h - 550, 125, 20);
+        map.addHazard(new Spikes(150, h - 60, w - 175, 10, (w - 175) / 10));
+
+        // Add the light floors for the Player to scale
+        map.addLightFloor(200, h - 170, 50);
+        map.addLightFloor(380, h - 250, 50);
+        map.addLightFloor(540, h - 330, 50);
+        map.addLightFloor(380, h - 410, 50);
+        map.addLightFloor(200, h - 490, 50);
+
+        setVariables(map);
+    }
+
     // Getters
     public int[][] getRects() {
         return rects;
@@ -182,5 +211,9 @@ public class PremadeMap {
 
     public Hazard[] getHazards() {
         return hazards;
+    }
+
+    public Text[] getTexts() {
+        return texts;
     }
 }
