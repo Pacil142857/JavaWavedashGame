@@ -35,6 +35,9 @@ public class PremadeMap {
             case 6:
                 formMap6(g, p, goal);
                 break;
+            case 7:
+                formMap7(g, p, goal);
+                break;
             default:
                 formMap1(g, p, goal);
                 mapNum = 1;
@@ -176,7 +179,7 @@ public class PremadeMap {
         setVariables(map);
     }
 
-    // The first non-tutorial map! The Player scales upward, and the goal is uniquely on the left
+    // The first non-tutorial map! The Player scales upward, and the goal is on the left
     public void formMap6(Graphics g, Player p, Goal goal) {
         p.setSpawnPoint(50, h - 121);
         p.respawn();
@@ -197,6 +200,39 @@ public class PremadeMap {
         map.addLightFloor(380, h - 410, 50);
         map.addLightFloor(200, h - 490, 50);
 
+        setVariables(map);
+    }
+
+    // Uses the concept from map 6 while adding more sections with difficulty induced by hazards
+    public void formMap7(Graphics g, Player p, Goal goal) {
+        p.setSpawnPoint(26, h - 121);
+        p.respawn();
+        goal.setLocation(50, h - 590);
+        goal.setSize(40, 100);
+        map = new Map(7, 4, 0, 6);
+        addBorder(map);
+
+        // Add the floors
+        map.addRect(25, h - 100, 125, 50);
+        map.addRect(25, h - 490, 625, 20);
+        map.addRect(275, h - 100, 225, 50);
+
+        // Add the saws and spikes in the beginning
+        map.addHazard(new Saw(150, h - 175, 62, Color.RED));
+        map.addHazard(new Saw(150, h - 350, 62, Color.RED));
+        map.addHazard(new Spikes(275, h - 110, 40, 10, 4));
+
+        // Add the light floor portion of the map
+        map.addLightFloor(650, h - 170, 50);
+        map.addLightFloor(830, h - 250, 50);
+        map.addLightFloor(970, h - 330, 50);
+        map.addRect(854, h - 410, 2, 145);
+        map.addLightFloor(830, h - 410, 50);
+        
+        // Add the spikes
+        map.addHazard(new Spikes(501, h - 60, w - 525, 10, (w - 525) / 10));
+        map.addHazard(new Spikes(550, h - 500, 50, 10, 5));
+        map.addHazard(new Spikes(375, h - 500, 50, 10, 5));
         setVariables(map);
     }
 
