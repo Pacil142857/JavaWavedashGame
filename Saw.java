@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Saw extends Hazard {
-    private int r;
+    protected int r;
 
     // Create a saw at a given point with a given radius
     public Saw(int x, int y, int r, Color fillColor) {

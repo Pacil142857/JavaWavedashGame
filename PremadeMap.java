@@ -69,7 +69,8 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 260);
         goal.setSize(40, 100);
-        map = new Map(7, 1, 3);
+        map = new Map(7, 1, 3, 1);
+        map.addHazard(new RotatingSaw(500, 200, 50, 30, Color.RED, true));
         addBorder(map);
 
         map.addRect(150, h - 120, 50, 70);
