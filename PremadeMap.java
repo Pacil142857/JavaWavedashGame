@@ -80,7 +80,7 @@ public class PremadeMap {
 
         map.addText(new Text(30, 20, "A/D - Move left/right"));
         map.addText(new Text(30, 50, "Space - Jump"));
-        map.addText(new Text(30, 80, "J - Air dodge"));
+        map.addText(new Text(30, 80, "J - Air dodge (only in the air)"));
 
         setVariables(map);
     }
@@ -94,15 +94,15 @@ public class PremadeMap {
         map = new Map(6, 2, 2);
         addBorder(map);
 
-        map.addRect(300, 0, 2, h - 65);
-        map.addRect(500, h - 250, 50, 200);
-        map.addRect(524, 0, 2, h - 265);
+        map.addRect(370, 0, 2, h - 65);
+        map.addRect(570, h - 250, 50, 200);
+        map.addRect(594, 0, 2, h - 265);
 
-        map.addLightFloor(450, h - 110, 50);
-        map.addLightFloor(300, h - 190, 50);
+        map.addLightFloor(520, h - 110, 50);
+        map.addLightFloor(370, h - 190, 50);
 
-        map.addText(new Text(550, 20, "Air dodge into the ground to perform a wavedash"));
-        map.addText(new Text(550, 50, "Wavedashing can get you through small places"));
+        map.addText(new Text(30, 20, "Air dodge into the ground to wavedash"));
+        map.addText(new Text(140, h - 20, "Wavedashing can get you through small spaces", Color.WHITE));
 
         setVariables(map);
     }
@@ -113,7 +113,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 310);
         goal.setSize(40, 100);
-        map = new Map(6, 3, 1);
+        map = new Map(6, 3, 2);
         addBorder(map);
 
         map.addLightFloor(100, h - 130, 50);
@@ -124,7 +124,8 @@ public class PremadeMap {
         map.addLightFloor(600, h - 130, 50);
         map.addRect(850, h - 210, w - 775, 160);
 
-        map.addText(new Text(30, 20, "Jumping during a wavedash lets you keep the extra momentum"));
+        map.addText(new Text(30, 20, "Jump during a wavedash to perform a wavejump, which keeps the extra momentum"));
+        map.addText(new Text(30, 50, "Remember: A wavedash is an air dodge into the ground"));
 
         setVariables(map);
     }
@@ -149,7 +150,7 @@ public class PremadeMap {
         map.addHazard(new Saw(675, h - 455, 15, Color.RED));
         map.addHazard(new Spikes(650, h - 260, 50, 10, 5));
 
-        map.addText(new Text(30, 20, "To waveland, air dodge onto a platform after jumping past it"));
+        map.addText(new Text(705, h - 350, "To waveland, air dodge onto a platform after jumping past it", Color.WHITE));
 
         setVariables(map);
     }
@@ -174,7 +175,7 @@ public class PremadeMap {
         map.addHazard(new Spikes(400, h - 60, 300, 10, 30));
 
         map.addText(new Text(10, h - 430, "While air dodging, you are invincible", Color.WHITE));
-        map.addText(new Text(10, h - 400, "Wavedashing off edges keeps momentum", Color.WHITE));
+        map.addText(new Text(400, h - 20, "Wavedashing off edges keeps momentum", Color.WHITE));
 
         setVariables(map);
     }
@@ -209,7 +210,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(50, h - 590);
         goal.setSize(40, 100);
-        map = new Map(7, 4, 0, 6);
+        map = new Map(7, 5, 0, 6);
         addBorder(map);
 
         // Add the floors
@@ -228,6 +229,7 @@ public class PremadeMap {
         map.addLightFloor(970, h - 330, 50);
         map.addRect(854, h - 409, 2, 145);
         map.addLightFloor(830, h - 410, 50);
+        map.addLightFloor(650, h - 490, 30);
         
         // Add the spikes
         map.addHazard(new Spikes(501, h - 60, w - 525, 10, (w - 525) / 10));

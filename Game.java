@@ -129,7 +129,7 @@ public class Game extends JPanel{
 
     // Runs the game
     public static void main(String[] args) {
-        JFrame frame = new JFrame("WaveDash");
+        JFrame frame = new JFrame("WaveJump");
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocation(0, 0);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
