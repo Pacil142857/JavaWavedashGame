@@ -1,3 +1,3 @@
 # WaveJump
 
-This is meant to be a simple platforming game with wavedashing made in Java. Right now, it's a work in progress. Currently, downloading this game and trying to play it won't work since the code will try to load music that won't exist. Please use the build that came before the commit that added music.
+This is meant to be a simple platforming game with wavedashing made in Java. The main gimmick is that you can jump out of a wavedash, and doing this keeps the extra momentum from wavedashing. It's pretty much complete, but there's a lot more that can be added. This more like a proof-of-concept than anything. It should work if you run it in the directory it's in, but if it doesn't, message me.

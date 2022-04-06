@@ -294,4 +294,8 @@ public class PremadeMap {
     public Text[] getTexts() {
         return texts;
     }
+
+    public int getMapNum() {
+        return mapNum;
+    }
 }

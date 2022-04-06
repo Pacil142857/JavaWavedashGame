@@ -88,6 +88,8 @@ public class Game extends JPanel{
     }
 
     private class TimerListener implements ActionListener {
+        private boolean reachedMap8 = false;
+
         @Override
         public void actionPerformed(ActionEvent e) {
             // Draw the background
@@ -115,8 +117,27 @@ public class Game extends JPanel{
                 map.toNextMap(g, player, goal);
             }
 
-            // Loop the song
-            song.loop(544768);
+            // Change the song starting at map 8, and loop whatever song is playing
+            if (map.getMapNum() > 7) {
+                if (reachedMap8) {
+                    song.loop(1533952);
+                }
+                else {
+                    song.stopMusic();
+                    song = new Song("resources\\intro2.wav", "resources\\loop2.wav");
+                    song.playIntro();
+                    reachedMap8 = true;
+                }
+            }
+            else if (reachedMap8) {
+                song.stopMusic();
+                song = new Song("resources\\intro1.wav", "resources\\loop1.wav");
+                song.playIntro();
+                reachedMap8 = false;
+            }
+            else {
+                song.loop(544768);
+            }
 
             repaint();
         }
