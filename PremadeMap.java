@@ -227,12 +227,12 @@ public class PremadeMap {
         map.addHazard(new Spikes(275, h - 110, 40, 10, 4));
 
         // Add the light floor portion of the map
-        map.addLightFloor(650, h - 170, 50);
-        map.addLightFloor(830, h - 250, 50);
-        map.addLightFloor(970, h - 330, 50);
-        map.addRect(854, h - 409, 2, 145);
-        map.addLightFloor(830, h - 410, 50);
-        map.addLightFloor(650, h - 490, 30);
+        map.addLightFloor(640, h - 170, 50);
+        map.addLightFloor(820, h - 250, 50);
+        map.addLightFloor(960, h - 330, 50);
+        map.addRect(844, h - 409, 2, 145);
+        map.addLightFloor(820, h - 410, 50);
+        map.addLightFloor(650, h - 491, 30);
         
         // Add the spikes
         map.addHazard(new Spikes(501, h - 60, w - 525, 10, (w - 525) / 10));
