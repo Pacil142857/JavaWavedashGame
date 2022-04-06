@@ -82,7 +82,7 @@ public class Player {
             jumpCounter++;
         }
 
-        if (jumpCounter >= 2) {
+        if (jumpCounter >= 3) {
             if (!isAirDodging) {
                 jump();
             }
