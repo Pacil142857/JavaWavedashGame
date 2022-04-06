@@ -95,10 +95,6 @@ public class Game extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Draw the background
-            g.setColor(Color.WHITE);
-            g.fillRect(0, 0, WIDTH, HEIGHT);
-
             // Draw the map and make the player move
             map.drawMap(g);
             player.move(map.getRects(), map.getLightFloors(), dt);
