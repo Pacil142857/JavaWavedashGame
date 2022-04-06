@@ -30,7 +30,6 @@ public class Hazard {
 
     // Increase the death count and respawn the player
     public void killPlayer(Player p) {
-        p.setNumDeaths(p.getNumDeaths() + 1);
         p.respawn();
     }
 

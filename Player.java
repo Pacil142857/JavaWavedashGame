@@ -8,7 +8,6 @@ public class Player {
     private int height;
     private int spawnPointX;
     private int spawnPointY;
-    private int numDeaths;
     private int jumpCounter = 0;
     private Color fillColor;
     private Color outlineColor;
@@ -233,7 +232,7 @@ public class Player {
         // Set the direction of the airdodge based on which way the user is holding
         // default is down-right, but it can down-left too
         double direction = 3.9;
-        if (movingRight || !movingLeft) {
+        if (movingRight || (!movingLeft && xSpd >= 0)) {
             direction = 5.5;
         }
 
@@ -392,13 +391,6 @@ public class Player {
 
     // Auto-generated getters and setters
     // TODO: Re-generate these
-    public int getNumDeaths() {
-        return this.numDeaths;
-    }
-
-    public void setNumDeaths(int numDeaths) {
-        this.numDeaths = numDeaths;
-    }
 
     public double getX() {
         return this.x;
