@@ -75,7 +75,7 @@ public class Game extends JPanel{
         map.drawMap(g);
 
         // Create a Song
-        song = new Song("Animation Project\\intro1.wav", "Animation Project\\loop1.wav");
+        song = new Song("resources\\intro1.wav", "resources\\loop1.wav");
         song.playIntro();
 
         // Create the timer

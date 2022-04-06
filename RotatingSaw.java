@@ -116,7 +116,7 @@ public class RotatingSaw extends Saw {
         // Draw the saw
         try {
             // Try using the file
-            img = ImageIO.read(new File("Animation Project\\resources\\saw.png"));
+            img = ImageIO.read(new File("resources\\saw.png"));
             BufferedImage scaledImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
             AffineTransform at = new AffineTransform();
             at.scale((double) w / img.getWidth(), (double) w / img.getHeight());
