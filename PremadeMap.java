@@ -119,7 +119,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 310);
         goal.setSize(40, 100);
-        map = new Map(w, h, 6, 3, 2, game);
+        map = new Map(w, h, 6, 3, 3, game);
         addBorder(map);
 
         map.addLightFloor(100, h - 130, 50);
@@ -132,6 +132,7 @@ public class PremadeMap {
 
         map.addText(new Text(30, 20, "Jump during a wavedash to perform a wavejump, which keeps the extra momentum"));
         map.addText(new Text(30, 50, "Remember: A wavedash is an air dodge into the ground"));
+        map.addText(new Text(30, 80, "After landing from a wavejump, you keep your momentum for as long as you hold forward."));
 
         setVariables(map);
     }
