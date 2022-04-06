@@ -86,7 +86,6 @@ public class RotatingSaw extends Saw {
         rects = rotate((rects[0][0][0] + rects[0][0][1]) / 2.0, (rects[0][1][0] + rects[0][1][1]) / 2.0, rects, doubleRotater);
 
         // Move the saw
-        // TODO: Make the saw rotate
         int lastRect = rects.length - 1;
         x = (rects[lastRect][0][3] + rects[lastRect][0][2]) / 2.0 - 1 * r;
         y = (rects[lastRect][1][3] + rects[lastRect][1][2]) / 2.0 - 1 * r;
