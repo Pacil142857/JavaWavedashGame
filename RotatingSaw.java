@@ -1,5 +1,12 @@
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.awt.Graphics;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 public class RotatingSaw extends Saw {
     private double x;
@@ -92,7 +99,7 @@ public class RotatingSaw extends Saw {
     }
 
     // Draw the RotatingSaw
-    public void draw(Graphics g) {
+    public void draw(Graphics g, JPanel game) {
         move();
 
         // Draw the rectangles
@@ -107,8 +114,19 @@ public class RotatingSaw extends Saw {
         g.fillArc(circleX - rectLength / 5, circleY - rectLength / 5, 2 * rectLength / 5, 2 * rectLength / 5, 0 , 360);
 
         // Draw the saw
-        g.setColor(fillColor);
-        g.fillArc((int) (x + 0.5), (int) (y + 0.5), r * 2, r * 2, 0, 360);
+        try {
+            // Try using the file
+            img = ImageIO.read(new File("Animation Project\\resources\\saw.png"));
+            BufferedImage scaledImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            AffineTransform at = new AffineTransform();
+            at.scale((double) w / img.getWidth(), (double) w / img.getHeight());
+            scaledImg = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR).filter(img, scaledImg);
+            g.drawImage(scaledImg, (int) (x + 0.5), (int) (y + 0.5), game);
+        }
+        catch (IOException e) {
+            g.setColor(fillColor);
+            g.fillArc((int) (x + 0.5), (int) (y + 0.5), r * 2, r * 2, 0, 360);
+        }
     }
 
     // Determine if the RotatingSaw is touching the Player

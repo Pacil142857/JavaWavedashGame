@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 public class Spikes extends Hazard {
     private int numSpikes;
@@ -18,7 +19,7 @@ public class Spikes extends Hazard {
         this.numSpikes = numSpikes;
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, JPanel game) {
         g.setColor(fillColor);
         int l = w / numSpikes;
         int[] xPoints = new int[]{x, x + l / 2, x + l};

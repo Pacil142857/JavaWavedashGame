@@ -66,7 +66,7 @@ public class Game extends JPanel{
 
         // Create a Player and a Map
         player = new Player(50, HEIGHT - 100);
-        map = new PremadeMap(WIDTH, HEIGHT);
+        map = new PremadeMap(WIDTH, HEIGHT, this);
         goal = new Goal(WIDTH - 100, HEIGHT - 260, 40, 100);
         goal.draw(g);
 

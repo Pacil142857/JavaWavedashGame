@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 public class Hazard {
     protected int x;
@@ -35,7 +36,7 @@ public class Hazard {
 
     // "Draw" the hazard
     // This should be implemented in every subclass of Hazard
-    public void draw(Graphics g) {}
+    public void draw(Graphics g, JPanel game) {}
 
     // "Check" if a hazard is touching the Player
     // This should be implemented in every subclass of Hazard

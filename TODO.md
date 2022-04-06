@@ -10,8 +10,7 @@
 - [ ] Allow the Player to drop through light floors (not required)
 - [ ] Optimize performance in addX methods in Map class
 - [ ] Add upside-down spikes
-- [ ] Add moving hazards
-- [ ] Give the saws an image so they actually look like saws
+- [ ] Make saws rotate
 
 ## Fixes
 
@@ -35,3 +34,5 @@
 - [x] Make going to a new map completely reset the Player's state
 - [x] Prevent the Player from air dodging multiple times in the air
 - [x] Add text to maps
+- [x] Add moving hazards
+- [x] Add images to saws

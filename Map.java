@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 public class Map {
     private int[][] rects;
@@ -8,25 +9,28 @@ public class Map {
     private Color fillColor;
     private Color outlineColor;
     private Text[] texts;
+    private JPanel game;
 
     // Create a map with a given number of rectangles, light floors, and texts
-    public Map(int numRects, int numLightFloors, int numTexts) {
+    public Map(int numRects, int numLightFloors, int numTexts, JPanel game) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[0];
         this.texts = new Text[numTexts];
         this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
+        this.game = game;
     }
 
     // Create a map with a given number of rectangles, light floors, texts, and hazards
-    public Map (int numRects, int numLightFloors, int numTexts, int numHazards) {
+    public Map (int numRects, int numLightFloors, int numTexts, int numHazards, JPanel game) {
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[numHazards];
         this.texts = new Text[numTexts];
         this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
+        this.game = game;
     }
 
     // Create a map with certain colors and a given number of rectangles, light floors, texts, and hazards
@@ -108,7 +112,7 @@ public class Map {
 
         // Draw the hazards
         for (Hazard haz : hazards) {
-            haz.draw(g);
+            haz.draw(g, game);
         }
 
         // Write out text

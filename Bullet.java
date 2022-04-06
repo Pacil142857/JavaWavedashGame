@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 public class Bullet extends Hazard{
     private double x;
@@ -47,7 +48,7 @@ public class Bullet extends Hazard{
     }
 
     // Draw the Bullet
-    public void draw(Graphics g) {
+    public void draw(Graphics g, JPanel game) {
         move();
         
         // Draw the Bullet

@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 public class PremadeMap {
     private Map map;
@@ -10,11 +11,13 @@ public class PremadeMap {
     private Hazard[] hazards;
     private Text[] texts;
     private int mapNum = 1;
+    private JPanel game;
 
     // Create a PremadeMap with a given width and height
-    public PremadeMap(int width, int height) {
+    public PremadeMap(int width, int height, JPanel game) {
         this.w = width;
         this.h = height;
+        this.game = game;
     }
 
     public void toNextMap(Graphics g, Player p, Goal goal) {
@@ -69,7 +72,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 260);
         goal.setSize(40, 100);
-        map = new Map(7, 1, 3);
+        map = new Map(7, 1, 3, game);
         addBorder(map);
 
         map.addRect(150, h - 120, 50, 70);
@@ -91,7 +94,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 300, h - 150);
         goal.setSize(40, 100);
-        map = new Map(6, 2, 2);
+        map = new Map(6, 2, 2, game);
         addBorder(map);
 
         map.addRect(370, 0, 2, h - 65);
@@ -113,7 +116,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 310);
         goal.setSize(40, 100);
-        map = new Map(6, 3, 2);
+        map = new Map(6, 3, 2, game);
         addBorder(map);
 
         map.addLightFloor(100, h - 130, 50);
@@ -136,7 +139,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 470);
         goal.setSize(40, 100);
-        map = new Map(6, 2, 1, 3);
+        map = new Map(6, 2, 1, 3, game);
         addBorder(map);
 
         map.addRect(25, h - 250, 275, 200);
@@ -161,7 +164,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 150);
         goal.setSize(40, 100);
-        map = new Map(5, 0, 2, 4);
+        map = new Map(5, 0, 2, 4, game);
         addBorder(map);
 
         // Add the elevated floor, wall coming from the ceiling, and spikes
@@ -186,7 +189,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(50, h - 650);
         goal.setSize(40, 100);
-        map = new Map(5, 5, 0, 1);
+        map = new Map(5, 5, 0, 1, game);
         addBorder(map);
 
         // Add the Player's floor, the goal's floor, and the spikes
@@ -210,7 +213,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(50, h - 590);
         goal.setSize(40, 100);
-        map = new Map(7, 5, 0, 6);
+        map = new Map(7, 5, 0, 6, game);
         addBorder(map);
 
         // Add the floors
