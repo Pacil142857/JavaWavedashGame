@@ -41,6 +41,9 @@ public class PremadeMap {
             case 7:
                 formMap7(g, p, goal);
                 break;
+            case 8:
+                formMap8(g, p, goal);
+                break;
             default:
                 formMap1(g, p, goal);
                 mapNum = 1;
@@ -238,6 +241,40 @@ public class PremadeMap {
         map.addHazard(new Spikes(501, h - 60, w - 525, 10, (w - 525) / 10));
         map.addHazard(new Spikes(550, h - 500, 50, 10, 5));
         map.addHazard(new Spikes(375, h - 500, 50, 10, 5));
+
+        setVariables(map);
+    }
+
+    // A difficult map with RotatingSaws and Bullets in which the Player must move quickly and carefully
+    public void formMap8(Graphics g, Player p, Goal goal) {
+        p.setSpawnPoint(30, h - 71);
+        p.respawn();
+        goal.setLocation(50, h - 570);
+        goal.setSize(40, 100);
+        map = new Map(6, 3, 0, 7, game);
+        addBorder(map);
+
+        // Add the rectangles
+        map.addRect(25, h - 190, w - 225, 80);
+        map.addRect(225, h - 330, w - 225, 80);
+        map.addRect(25, h - 470, w - 225, 80);
+
+        // Add the light floors
+        map.addLightFloor(w - 125, h - 120, 50);
+        map.addLightFloor(125, h - 260, 50);
+        map.addLightFloor(w - 125, h - 400, 50);
+
+        // Add the RotatingSaws
+        map.addHazard(new RotatingSaw(w - 250, h - 150, 15, 100, Color.RED, false, false));
+        map.addHazard(new RotatingSaw(w - 250, h - 430, 15, 100, Color.RED, false, true));
+        map.addHazard(new RotatingSaw(250, h - 430, 15, 100, Color.RED, false, false));
+        map.addHazard(new RotatingSaw(w / 3, h - 290, 15, 60, Color.RED, true, true));
+        map.addHazard(new RotatingSaw(2 * w / 3, h - 290, 15, 60, Color.RED, true, false));
+
+        // Add the Bullets
+        map.addHazard(new Bullet(300, 0, 150, 50, 0, 8));
+        map.addHazard(new Bullet(700, h - 250, 150, 50, 0, -5));
+
         setVariables(map);
     }
 

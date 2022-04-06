@@ -12,17 +12,17 @@ public class RotatingSaw extends Saw {
     private double x;
     private double y;
     private int rectLength;
-    private boolean doubleRotater;
+    private boolean goingLeft;
     private double[][][] rects;
 
     // Create a RotatingSaw at a given point with a given radius and color
-    public RotatingSaw(int x, int y, int r, int rectLength, Color fillColor, boolean doubleRotater) {
+    public RotatingSaw(int x, int y, int r, int rectLength, Color fillColor, boolean doubleRotater, boolean goingLeft) {
         super(x, y, r, fillColor);
-        this.doubleRotater = doubleRotater;
         this.rects = new double[doubleRotater ? 2 : 1][2][4];
         this.rectLength = rectLength;
         this.x = x;
         this.y = y;
+        this.goingLeft = goingLeft;
 
         // Set the values for the rectangles
         for (int i = 0; i < rects.length; i++) {
@@ -90,7 +90,7 @@ public class RotatingSaw extends Saw {
     // Move the RotatingSaw
     public void move() {
         // Rotate the rectangle(s)
-        rects = rotate((rects[0][0][0] + rects[0][0][1]) / 2.0, (rects[0][1][0] + rects[0][1][1]) / 2.0, rects, doubleRotater);
+        rects = rotate((rects[0][0][0] + rects[0][0][1]) / 2.0, (rects[0][1][0] + rects[0][1][1]) / 2.0, rects, goingLeft);
 
         // Move the saw
         int lastRect = rects.length - 1;
@@ -103,15 +103,17 @@ public class RotatingSaw extends Saw {
         move();
 
         // Draw the rectangles
-        g.setColor(Color.BLACK);
+        g.setColor(new Color(30, 30, 30));
         for (double[][] rect : rects) {
             g.fillPolygon(round(rect[0]), round(rect[1]), 4);
         }
 
-        // Draw a circle between the rectangles
-        int circleX = (int) ((rects[0][0][3] + rects[0][0][2]) / 2.0 + 0.5);
-        int circleY = (int) ((rects[0][1][3] + rects[0][1][2]) / 2.0 + 0.5);
-        g.fillArc(circleX - rectLength / 5, circleY - rectLength / 5, 2 * rectLength / 5, 2 * rectLength / 5, 0 , 360);
+        // Draw a circle between the rectangles, but only if there are 2 rectangles
+        if (rects.length > 1) {
+            int circleX = (int) ((rects[0][0][3] + rects[0][0][2]) / 2.0 + 0.5);
+            int circleY = (int) ((rects[0][1][3] + rects[0][1][2]) / 2.0 + 0.5);
+            g.fillArc(circleX - rectLength / 5, circleY - rectLength / 5, 2 * rectLength / 5, 2 * rectLength / 5, 0 , 360);
+        }
 
         // Draw the saw
         try {
