@@ -2,7 +2,7 @@
 
 ## Core Features
 
-- [ ] Add more maps
+All done!
 
 ## Additional Features
 
@@ -11,6 +11,7 @@
 - [ ] Optimize performance in addX methods in Map class
 - [ ] Add upside-down spikes
 - [ ] Make saws rotate
+- [ ] Change the music for stage 8
 
 ## Fixes
 

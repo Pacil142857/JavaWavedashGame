@@ -75,7 +75,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 260);
         goal.setSize(40, 100);
-        map = new Map(7, 1, 3, game);
+        map = new Map(w, h, 7, 1, 3, game);
         addBorder(map);
 
         map.addRect(150, h - 120, 50, 70);
@@ -97,7 +97,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 300, h - 150);
         goal.setSize(40, 100);
-        map = new Map(6, 2, 2, game);
+        map = new Map(w, h, 6, 2, 2, game);
         addBorder(map);
 
         map.addRect(370, 0, 2, h - 65);
@@ -119,7 +119,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 310);
         goal.setSize(40, 100);
-        map = new Map(6, 3, 2, game);
+        map = new Map(w, h, 6, 3, 2, game);
         addBorder(map);
 
         map.addLightFloor(100, h - 130, 50);
@@ -142,7 +142,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 470);
         goal.setSize(40, 100);
-        map = new Map(6, 2, 1, 3, game);
+        map = new Map(w, h, 6, 2, 1, 3, game);
         addBorder(map);
 
         map.addRect(25, h - 250, 275, 200);
@@ -167,7 +167,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(w - 100, h - 150);
         goal.setSize(40, 100);
-        map = new Map(5, 0, 2, 4, game);
+        map = new Map(w, h, 5, 0, 2, 4, game);
         addBorder(map);
 
         // Add the elevated floor, wall coming from the ceiling, and spikes
@@ -192,7 +192,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(50, h - 650);
         goal.setSize(40, 100);
-        map = new Map(5, 5, 0, 1, game);
+        map = new Map(w, h, 5, 5, 0, 1, game);
         addBorder(map);
 
         // Add the Player's floor, the goal's floor, and the spikes
@@ -216,7 +216,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(50, h - 590);
         goal.setSize(40, 100);
-        map = new Map(7, 5, 0, 6, game);
+        map = new Map(w, h, 7, 5, 0, 6, game);
         addBorder(map);
 
         // Add the floors
@@ -251,7 +251,7 @@ public class PremadeMap {
         p.respawn();
         goal.setLocation(50, h - 570);
         goal.setSize(40, 100);
-        map = new Map(6, 3, 0, 7, game);
+        map = new Map(w, h, 6, 3, 0, 7, Color.BLACK, Color.WHITE, Color.BLACK, game);
         addBorder(map);
 
         // Add the rectangles
@@ -266,7 +266,7 @@ public class PremadeMap {
 
         // Add the RotatingSaws
         map.addHazard(new RotatingSaw(w - 250, h - 150, 15, 100, Color.RED, false, false));
-        map.addHazard(new RotatingSaw(w - 250, h - 430, 15, 100, Color.RED, false, true));
+        map.addHazard(new RotatingSaw(w - 250, h - 430, 15, 100, Color.RED, false, false));
         map.addHazard(new RotatingSaw(250, h - 430, 15, 100, Color.RED, false, false));
         map.addHazard(new RotatingSaw(w / 3, h - 290, 15, 60, Color.RED, true, true));
         map.addHazard(new RotatingSaw(2 * w / 3, h - 290, 15, 60, Color.RED, true, false));

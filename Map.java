@@ -3,44 +3,57 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class Map {
+    private int w;
+    private int h;
     private int[][] rects;
     private int[][] lightFloors;
     private Hazard[] hazards;
     private Color fillColor;
     private Color outlineColor;
+    private Color backgroundColor;
     private Text[] texts;
     private JPanel game;
 
     // Create a map with a given number of rectangles, light floors, and texts
-    public Map(int numRects, int numLightFloors, int numTexts, JPanel game) {
+    public Map(int width, int height, int numRects, int numLightFloors, int numTexts, JPanel game) {
+        this.w = width;
+        this.h = height;
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[0];
         this.texts = new Text[numTexts];
         this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
+        this.backgroundColor = Color.WHITE;
         this.game = game;
     }
 
     // Create a map with a given number of rectangles, light floors, texts, and hazards
-    public Map (int numRects, int numLightFloors, int numTexts, int numHazards, JPanel game) {
+    public Map (int width, int height, int numRects, int numLightFloors, int numTexts, int numHazards, JPanel game) {
+        this.w = width;
+        this.h = height;
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[numHazards];
         this.texts = new Text[numTexts];
         this.fillColor = Color.BLACK;
         this.outlineColor = Color.BLACK;
+        this.backgroundColor = Color.WHITE;
         this.game = game;
     }
 
     // Create a map with certain colors and a given number of rectangles, light floors, texts, and hazards
-    public Map(int numRects, int numLightFloors, int numTexts, int numHazards, Color fillColor, Color outlineColor) {
+    public Map(int width, int height, int numRects, int numLightFloors, int numTexts, int numHazards, Color fillColor, Color outlineColor, Color backgroundColor, JPanel game) {
+        this.w = width;
+        this.h = height;
         this.rects = new int[numRects][4];
         this.lightFloors = new int[numLightFloors][3];
         this.hazards = new Hazard[numHazards];
         this.texts = new Text[numTexts];
         this.fillColor = fillColor;
         this.outlineColor = outlineColor;
+        this.backgroundColor = backgroundColor;
+        this.game = game;
     }
 
     // Add a rectangle to the map
@@ -95,6 +108,10 @@ public class Map {
 
     // Draw the map
     public void drawMap(Graphics g) {
+        // Draw the background
+        g.setColor(backgroundColor);
+        g.fillRect(0, 0, w, h);
+
         // Fill the rectangles
         g.setColor(fillColor);
         for (int[] rect : rects) {
