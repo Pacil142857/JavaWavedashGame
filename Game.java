@@ -27,27 +27,30 @@ public class Game extends JPanel{
     // Have the Player do things when certain buttons are pressed
     private class Keyboard implements KeyListener {
         public void keyPressed(KeyEvent e) {
-            switch (e.getKeyChar()) {
-                case 's':
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_D:
                     player.moveRight();
                     break;
-                case 'a':
+                case KeyEvent.VK_A:
                     player.moveLeft();
                     break;
-                case ' ':
+                case KeyEvent.VK_SPACE:
                     player.startJump();
                     break;
-                case 'n':
+                case KeyEvent.VK_W:
+                    player.startJump();
+                    break;
+                case KeyEvent.VK_J:
                     player.airDodge();
                     break;
             }
         }
         public void keyReleased(KeyEvent e) {
-            switch (e.getKeyChar()) {
-                case 's':
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_D:
                     player.stopMovingRight();
                     break;
-                case 'a':
+                case KeyEvent.VK_A:
                     player.stopMovingLeft();
                     break;
             }
