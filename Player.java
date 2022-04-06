@@ -232,7 +232,7 @@ public class Player {
         // Set the direction of the airdodge based on which way the user is holding
         // default is down-right, but it can down-left too
         double direction = 3.9;
-        if (movingRight || (!movingLeft && xSpd >= 0)) {
+        if ((movingRight && !movingLeft) || ((!movingLeft || movingLeft && movingRight) && xSpd >= 0)) {
             direction = 5.5;
         }
 
@@ -314,9 +314,11 @@ public class Player {
         if (isAirDodging) {
             return;
         }
+        
+        boolean notMoving = movingRight && movingLeft;
 
         // Make the Player go left if they're going right
-        if (xSpd > 0 && !movingRight) {
+        if (xSpd > 0 && (!movingRight || notMoving)) {
             xAcc -= Math.abs(-0.5 * xSpd + 13);
 
             if (xSpd + xAcc * dt / 1000 <= 0) {
@@ -325,7 +327,7 @@ public class Player {
             }
         }
         // Make the player go right if they're going left
-        else if (xSpd < 0 && !movingLeft) {
+        else if (xSpd < 0 && (!movingLeft || notMoving)) {
             xAcc += Math.abs(-0.5 * xSpd + 13);
 
             if (xSpd + xAcc * dt / 1000 >= 0) {
