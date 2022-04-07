@@ -11,7 +11,6 @@ All done!
 - [ ] Optimize performance in addX methods in Map class
 - [ ] Add upside-down spikes
 - [ ] Make saws rotate
-- [ ] Change the music for stage 8
 
 ## Fixes
 
@@ -37,3 +36,4 @@ All done!
 - [x] Add text to maps
 - [x] Add moving hazards
 - [x] Add images to saws
+- [x] Change the music for stage 8
