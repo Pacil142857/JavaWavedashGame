@@ -8,7 +8,6 @@ All done!
 
 - [ ] Add vertical wavedashes (may not be a good idea)
 - [ ] Allow the Player to drop through light floors (not required)
-- [ ] Optimize performance in addX methods in Map class
 - [ ] Add upside-down spikes
 - [ ] Make saws rotate
 
@@ -37,3 +36,4 @@ All done!
 - [x] Add moving hazards
 - [x] Add images to saws
 - [x] Change the music for stage 8
+- [x] Optimize performance in addX methods in Map class

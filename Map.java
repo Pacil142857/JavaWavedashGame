@@ -5,6 +5,10 @@ import javax.swing.JPanel;
 public class Map {
     private int w;
     private int h;
+    private int numRects = 0;
+    private int numLightFloors = 0;
+    private int numHazards = 0;
+    private int numTexts = 0;
     private int[][] rects;
     private int[][] lightFloors;
     private Hazard[] hazards;
@@ -58,52 +62,31 @@ public class Map {
 
     // Add a rectangle to the map
     public void addRect(int x, int y, int w, int h) {
-        // Find the first entry in rects that hasn't been initialized
-        for (int i = 0; i < rects.length; i++) {
-            if (rects[i][0] == 0 && rects[i][1] == 0 && rects[i][2] == 0 && rects[i][3] == 0) {
-                // Update rects
-                rects[i][0] = x;
-                rects[i][1] = y;
-                rects[i][2] = w;
-                rects[i][3] = h;
-                break;
-            }
-        }
+        rects[numRects][0] = x;
+        rects[numRects][1] = y;
+        rects[numRects][2] = w;
+        rects[numRects][3] = h;
+        numRects++;
     }
 
     // Add a light floor to the map
     public void addLightFloor(int x, int y, int w) {
-        // Find the first entry in lightFloors that hasn't been initialized
-        for (int i = 0; i < lightFloors.length; i++) {
-            if (lightFloors[i][0] == 0 && lightFloors[i][1] == 0 && lightFloors[i][2] == 0) {
-                // Add the light flooor
-                lightFloors[i][0] = x;
-                lightFloors[i][1] = y;
-                lightFloors[i][2] = x + w;
-                break;
-            }
-        }
+        lightFloors[numLightFloors][0] = x;
+        lightFloors[numLightFloors][1] = y;
+        lightFloors[numLightFloors][2] = x + w;
+        numLightFloors++;
     }
 
     // Add text to the map
     public void addText(Text text) {
-        for (int i = 0; i < texts.length; i++) {
-            if (texts[i] == null) {
-                texts[i] = text;
-                break;
-            }
-        }
+        texts[numTexts] = text;
+        numTexts++;
     }
 
     // Add a hazard to the map
     public void addHazard(Hazard haz) {
-        // Find the first hazard that hasn't been initialized and set it to this hazard
-        for (int i = 0; i < hazards.length; i++) {
-            if (hazards[i] == null) {
-                hazards[i] = haz;
-                break;
-            }
-        }
+        hazards[numHazards] = haz;
+        numHazards++;
     }
 
     // Draw the map
