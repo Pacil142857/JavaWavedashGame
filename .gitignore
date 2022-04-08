@@ -1,4 +1,4 @@
 .vscode/*
-*.xml
+launch4jconfig.xml
 *.exe
 target/*
