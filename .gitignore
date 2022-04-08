@@ -1,5 +1,4 @@
-*.wav
-*.png
+.vscode/*
 *.xml
-*.jar
 *.exe
+target/*
