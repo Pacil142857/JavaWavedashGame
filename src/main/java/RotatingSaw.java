@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -40,6 +38,7 @@ public class RotatingSaw extends Saw {
     }
 
     // Rotate rectangles about a given point
+    // I got the formula for doing this at https://stackoverflow.com/questions/12161277/how-to-rotate-a-vertex-around-a-certain-point
     private static double[][][] rotate(double x, double y, double[][][] rects, boolean goingLeft) {
         int direction = goingLeft ? 1 : -1;
         // DeltaX and deltaY refer to the distance between rectangle 1 and the point it's rotating about
@@ -119,6 +118,7 @@ public class RotatingSaw extends Saw {
         // Draw the saw
         try {
             // Try using the file
+            // Credit to https://stackoverflow.com/questions/58008960/how-to-read-files-from-a-resources-folder-in-java for explaining how to access resources
             img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("saw.png"));
             BufferedImage scaledImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
             AffineTransform at = new AffineTransform();

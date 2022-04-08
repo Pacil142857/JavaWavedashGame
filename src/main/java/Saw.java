@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -23,6 +21,7 @@ public class Saw extends Hazard {
     public void draw(Graphics g, JPanel game) {
         try {
             // Try using the file
+            // Credit to https://stackoverflow.com/questions/58008960/how-to-read-files-from-a-resources-folder-in-java for explaining how to access resources
             img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("saw.png"));
             BufferedImage scaledImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
             AffineTransform at = new AffineTransform();

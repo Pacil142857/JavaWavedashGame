@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.awt.Color;
 
 public class Text {

@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.io.*;
 import javax.sound.sampled.*;
 
@@ -12,6 +10,7 @@ public class Song {
     public Song(String introPath, String loopPath) {
         try {
             // Initialize the intro
+            // Credit to https://stackoverflow.com/questions/58008960/how-to-read-files-from-a-resources-folder-in-java for explaining how to access resources
             InputStream path1 = getClass().getClassLoader().getResourceAsStream(introPath);
             AudioInputStream audioInput1 = AudioSystem.getAudioInputStream(new BufferedInputStream(path1));
             intro = AudioSystem.getClip();
